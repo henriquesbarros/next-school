@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         'Disciplina', {
         nome: DataTypes.STRING,
         modulos_id: DataTypes.INTEGER
-    }, {
+    },{
+     
         tableName: 'disciplinas',
         timestamps: false
     }
@@ -11,17 +12,9 @@ module.exports = (sequelize, DataTypes) => {
 
     Disciplina.associate = (models) => {
         // relação 1:n
-        Disciplina.belongsToMany(models.Aluno, {
-            as: "notas",
-            through: "alunos_disciplinas",
-            foreignKey: 'alunos_id',
-            otherKey: "disciplinas_id",
-        },{
-                    // check se funciona com hendy ou iago
-            notas: DataTypes.INTEGER 
-        });
-
-    Disciplina.belongsTo(models.Modulo, {as: "modulo", foreignKey: 'modulos_id'});    
+        Disciplina.hasMany(models.alunoDisciplina, {as: "alunos", foreignKey: 'disciplinas_id'});
+        // relação N:1
+        Disciplina.belongsTo(models.Modulo, {as: "modulo", foreignKey: 'modulos_id'});    
     }
     return Disciplina;
 } 
