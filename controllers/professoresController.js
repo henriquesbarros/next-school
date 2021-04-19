@@ -11,7 +11,7 @@ const professorController = {
         })
         return res.json(professores);
     },
-    create: async (req, res) => {
+    post: async (req, res) => {
         const { nome, senha_professor, cpf, img_perfil, modulos_id } = req.body
         let novoProfessor = await Professor.create({
             nome,
@@ -22,7 +22,7 @@ const professorController = {
         })           
         return res.json(novoProfessor);
     },
-    update: async (req, res) => {
+    put: async (req, res) => {
         let { id } = req.params
         let { nome, senha_professor, modulos_id } = req.body;
         let atualizarProfessor = await Professor.update({
