@@ -1,4 +1,4 @@
-const { HasMany } = require("sequelize/types")
+
 
 module.exports = (sequelize, DataTypes) => {
     const Modulo = sequelize.define(
