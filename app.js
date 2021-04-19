@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // CONFIGURAR AS ROTAS
+const index = require('./routes/index');
+const aluno = require('./routes/aluno');
+const professor = require('./routes/professor');
 var administrador = require('./routes/administrador');
 
 var app = express();
@@ -19,6 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', index);
+app.use('/aluno', aluno);
+app.use('/professor', professor);
 app.use('/admin', administrador);
 
 // catch 404 and forward to error handler
