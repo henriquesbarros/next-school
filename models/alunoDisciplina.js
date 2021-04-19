@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     },
         {
             tableName: 'alunos_disciplina',
-            timestamps: false
+            timestamps: true
         }
     )
 
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
 
     alunoDisciplina.associate = (models) => {
         // relação N:1
-        alunoDisciplina.belongsTo(models.Aluno, { as: "notas", foreignKey: "alunos_id" })
+        alunoDisciplina.belongsTo(models.Aluno, { as: "nota", foreignKey: "alunos_id" })
         // relação N:1
         alunoDisciplina.belongsTo(models.Disciplina, { as: "alunos", foreignKey: "disciplinas_id" })
     }

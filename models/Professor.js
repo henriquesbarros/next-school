@@ -18,9 +18,9 @@ module.exports = (sequelize, DataTypes) => {
     // To create a One - To - Many relationship, the hasMany and belongsTo associations are used together;
     // To create a Many - To - Many relationship, two belongsToMany calls are used together
     
-    Post.associate = (models) => {
+    Professor.associate = (models) => {
         // relação N:1 (vários posts de 1 usuario)
-       Post.belongsTo(models.Modulo, { as: "modulo", foreignKey: "modulos_id" });
+       Professor.belongsTo(models.Modulo, { as: "modulo", foreignKey: "modulos_id" });
     }
     return Professor;
 

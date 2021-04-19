@@ -1,6 +1,6 @@
-const { Sequelize, DataTypes } = require("sequelize/types");
 
-module.exports = (Sequelize, DataTypes) => {
+
+module.exports = (sequelize, DataTypes) => {
     const Aluno = sequelize.define(
         'Aluno', {
         nome: DataTypes.STRING,
@@ -18,17 +18,6 @@ module.exports = (Sequelize, DataTypes) => {
 
     Aluno.associate = (models) => {
         Aluno.hasMany(models.alunoDisciplina,{ as: "notas", foreignKey: "alunos_id" })
-        
-        // relação 1:n  
-        // Aluno.belongsToMany(models.Disciplina, {
-        //     as: "notas",
-        //     through: "alunos_disciplinas",
-        //     foreignKey: 'disciplinas_id',
-        //     otherKey: "alunos_id",
-        // },{
-        //          // check se funciona com hendy ou iago
-        //     notas: DataTypes.INTEGER 
-        // });
     }
     return Aluno;
 }
