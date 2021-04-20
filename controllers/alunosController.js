@@ -10,7 +10,8 @@ const alunosController = {
         const novoAluno = await Aluno.create({
             nome,
             cpf,
-            img_perfil
+            img_perfil,
+            modulos_id
         })
 
         const disciplinas = await Disciplina.findAll({

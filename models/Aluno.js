@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
         'Aluno', {
         nome: DataTypes.STRING,
         cpf: DataTypes.STRING,
-        img_perfil: DataTypes.STRING
+        img_perfil: DataTypes.STRING,
+        modulos_id: DataTypes.INTEGER
     }, {
         tableName: "alunos",
         timestamps: false
