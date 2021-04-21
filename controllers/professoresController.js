@@ -1,4 +1,6 @@
-const { Professor } = require('../models');
+const { Professor, Aluno, sequelize } = require('../models')
+const { Op } = require('sequelize')
+const { QueryTypes } = require('sequelize')
 
 const professorController = {
     login: (req, res) => {
@@ -7,20 +9,34 @@ const professorController = {
     criar: (req, res) => {
         return res.send("Página para registrar professor.")
     },
-    show: (req, res) => {
-        return res.send("Página do professor.")
+    show: async (req, res) => {
+        const { id } = req.params;
+        const mostrarProfessor = await Professor.findOne({
+            where: {
+                id
+            }
+        })
+        return res.json(mostrarProfessor)
     },
-    listAlunos: (req, res) => {
-        return res.send("Página de listagem de alunos")
+    // CONSEGUIMOS FAZER DE FORMA COM FILTRO SENDO OBRIGATÓRIO, QUEREMOS FAZER COM POSSIBILIDADE DE USAR SEM FILTRO
+    listAlunos: async (req, res) => {
+        const { filter } = req.params;
+        const listarAlunos = await Aluno.findAll({
+            where: {
+                nome: {[Op.like]: `%${filter}%`}
+            }
+        })
+        return res.json(listarAlunos)
     },
-    notas: (req, res) => {
-        return res.send("Página de digitação das notas.")
-    },
-    postNotas: (req ,res) => {
-        return
-    },
-    putNotas: (req, res) => {
-        return
+    notas: (req, res) => {        
+        return res.send("Página de notas")
+    },    
+    putNotas: async (req, res) => {
+        const { idAluno, idDisciplina } = req.params
+        const { notas } = req.body
+        const users = await sequelize.query(` UPDATE alunos_disciplina SET notas = `+ notas + ` WHERE alunos_id = ` + idAluno + ` and disciplinas_id = ` + idDisciplina,
+            {types: QueryTypes.UPDATE});    
+        return res.send(users)
     },
     post: async (req, res) => {
         const { nome, senha_professor, cpf, img_perfil, modulos_id } = req.body

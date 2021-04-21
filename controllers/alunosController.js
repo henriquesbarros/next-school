@@ -1,4 +1,6 @@
-const { Aluno, alunoDisciplina, Disciplina } = require('../models')
+const { Aluno, AlunoDisciplina, Disciplina, sequelize } = require('../models')
+const moduloFuncao = require('../lib/utils')
+const { QueryTypes } = require('sequelize')
 
 const alunosController = {
     login: (req, res) => {
@@ -7,11 +9,25 @@ const alunosController = {
     criar: (req, res) => {
         return res.send("Página para registrar aluno.")
     },
-    show: (req, res) => {
-        return res.send("Página do aluno.")
+    // VER COM HENDY COMO FAZER JOIN PELO SEQUELIZE    
+    show: async (req, res) => {
+        const { id } = req.params;
+        const users = await sequelize.query(`SELECT alunos.nome as 'nome', disciplinas.nome as'disciplina', alunos_disciplina.notas as 'notas'
+        from alunos_disciplina
+        inner join disciplinas on disciplinas.id = disciplinas_id
+        inner join alunos on alunos.id = alunos_id
+        where alunos_id =` + id,
+            {types: QueryTypes.SELECT});    
+        return res.send(users) 
     },
-    boletim: (req, res) => {
-        return res.send("Página de notas do aluno.")
+    boletim: async (req, res) => {
+        const { id } = req.params;
+        const users = await sequelize.query(`SELECT disciplinas.nome as'disciplina', alunos_disciplina.notas as 'notas'
+        from alunos_disciplina
+        inner join disciplinas on disciplinas.id = disciplinas_id        
+        where alunos_id =` + id,
+            {types: QueryTypes.SELECT});    
+        return res.send(users)        
     },
     post: async (req, res) => {
         const { modulos_id, nome, cpf, img_perfil } = req.body
@@ -29,7 +45,7 @@ const alunosController = {
         })
 
         const alunoDiscPromise = disciplinas.map(disciplina => {
-            alunoDisciplina.create({
+            AlunoDisciplina.create({
                 alunos_id: novoAluno.id,
                 disciplinas_id: disciplina.id
             })

@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
-    const alunoDisciplina = sequelize.define(
-        'alunoDisciplina', {
+    const AlunoDisciplina = sequelize.define(
+        'AlunoDisciplina', {
         alunos_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
@@ -25,11 +25,11 @@ module.exports = (sequelize, DataTypes) => {
     // To create a One - To - Many relationship, the hasMany and belongsTo associations are used together;
     // To create a Many - To - Many relationship, two belongsToMany calls are used together
 
-    alunoDisciplina.associate = (models) => {
+    AlunoDisciplina.associate = (models) => {
         // relação N:1
-        alunoDisciplina.belongsTo(models.Aluno, { as: "nota", foreignKey: "alunos_id" })
+        AlunoDisciplina.belongsTo(models.Aluno, { as: "nota", foreignKey: "alunos_id" })
         // relação N:1
-        alunoDisciplina.belongsTo(models.Disciplina, { as: "alunos", foreignKey: "disciplinas_id" })
+        AlunoDisciplina.belongsTo(models.Disciplina, { as: "alunos", foreignKey: "disciplinas_id" })
     }
-    return alunoDisciplina;
+    return AlunoDisciplina;
 }

@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
     
     Disciplina.associate = (models) => {
         // relação 1:n
-        Disciplina.hasMany(models.alunoDisciplina, {as: "alunos", foreignKey: 'disciplinas_id'});
+        Disciplina.hasMany(models.AlunoDisciplina, {as: "alunos", foreignKey: 'disciplinas_id'});
         // relação N:1
         Disciplina.belongsTo(models.Modulo, {as: "modulo", foreignKey: 'modulos_id'});    
     }

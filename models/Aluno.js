@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     // To create a Many - To - Many relationship, two belongsToMany calls are used together
 
     Aluno.associate = (models) => {
-        Aluno.hasMany(models.alunoDisciplina,{ as: "notas", foreignKey: "alunos_id" })
+        Aluno.hasMany(models.AlunoDisciplina,{ as: "notas", foreignKey: "alunos_id" })
     }
     return Aluno;
 }
+//show: async (req, res) => {
+        //
+        // let alunosEncontrados = await sequelize.query()
