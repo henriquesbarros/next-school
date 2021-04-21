@@ -1,9 +1,17 @@
 const { Aluno, alunoDisciplina, Disciplina } = require('../models')
 
 const alunosController = {
-    index: async (req, res) => {
-        const studentFound = await Aluno.findAll()
-        return res.json(studentFound)
+    login: (req, res) => {
+        return res.send("Página de login do aluno.")
+    },
+    criar: (req, res) => {
+        return res.send("Página para registrar aluno.")
+    },
+    show: (req, res) => {
+        return res.send("Página do aluno.")
+    },
+    boletim: (req, res) => {
+        return res.send("Página de notas do aluno.")
     },
     post: async (req, res) => {
         const { modulos_id, nome, cpf, img_perfil } = req.body
@@ -29,6 +37,13 @@ const alunosController = {
 
         const promisesFinalized = await Promise.all(alunoDiscPromise)
         return res.json(promisesFinalized)
+    },
+    index: async (req, res) => {
+        const alunosEncontrados = await Aluno.findAll()
+        return res.json(alunosEncontrados)
+    },
+    editar: (req, res) => {
+        return res.send("Página para editar um aluno.")
     },
     put: async (req, res) => {
         const { id } = req.params

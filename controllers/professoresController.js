@@ -1,15 +1,26 @@
-const { Professor, sequelize } = require('../models');
-const { Op } = require('sequelize');
+const { Professor } = require('../models');
 
 const professorController = {
-    index: async(req, res) => {
-        let professores = await Professor.findAll({
-            // order:[
-            //     ['id', 'ASC']
-            // ],
-            // limit: 4
-        })
-        return res.json(professores);
+    login: (req, res) => {
+        return res.send("Página de login do professor.")
+    },
+    criar: (req, res) => {
+        return res.send("Página para registrar professor.")
+    },
+    show: (req, res) => {
+        return res.send("Página do professor.")
+    },
+    listAlunos: (req, res) => {
+        return res.send("Página de listagem de alunos")
+    },
+    notas: (req, res) => {
+        return res.send("Página de digitação das notas.")
+    },
+    postNotas: (req ,res) => {
+        return
+    },
+    putNotas: (req, res) => {
+        return
     },
     post: async (req, res) => {
         const { nome, senha_professor, cpf, img_perfil, modulos_id } = req.body
@@ -21,6 +32,13 @@ const professorController = {
             modulos_id
         })           
         return res.json(novoProfessor);
+    },
+    index: async(req, res) => {
+        let professores = await Professor.findAll()
+        return res.json(professores);
+    },
+    editar: (req, res) => {
+        return res.send("Página para editar um aluno.")
     },
     put: async (req, res) => {
         let { id } = req.params

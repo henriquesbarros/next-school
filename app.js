@@ -8,7 +8,7 @@ var logger = require('morgan');
 const index = require('./routes/index');
 const aluno = require('./routes/aluno');
 const professor = require('./routes/professor');
-var administrador = require('./routes/administrador');
+const administrador = require('./routes/administrador');
 
 var app = express();
 
