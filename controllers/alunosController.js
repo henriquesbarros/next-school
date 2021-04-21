@@ -38,7 +38,7 @@ const alunosController = {
         const promisesFinalized = await Promise.all(alunoDiscPromise)
         return res.json(promisesFinalized)
     },
-    index: async (req, res) => {
+    listagem: async (req, res) => {
         const alunosEncontrados = await Aluno.findAll()
         return res.json(alunosEncontrados)
     },

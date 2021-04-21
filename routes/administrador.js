@@ -9,18 +9,18 @@ router.get('/selecionar', admController.select)
 
 // Alunos
 router.get('/criar/aluno', alunosController.criar)
-router.post('/alunos/criar', alunosController.post)
-router.get('/alunos/index', alunosController.index)
-router.get('/alunos/editar', alunosController.editar)
-router.put('/alunos/atualizar/:id', alunosController.put)
-router.delete('/alunos/deletar/:id', alunosController.delete)
+router.post('/criar/aluno', alunosController.post)
+router.get('/alunos', alunosController.listagem)
+router.get('/alunos/:id', alunosController.editar)
+router.put('/alunos/:id', alunosController.put)
+router.delete('/alunos/:id', alunosController.delete)
 
 // Professores
 router.get('/criar/professor', professoresController.criar)
-router.post('/professores/criar', professoresController.post)
-router.get('/professores/index', professoresController.index)
-router.get('/professores/editar', professoresController.editar)
-router.put('/professores/atualizar/:id', professoresController.put)
-router.delete('/professores/deletar/:id', professoresController.delete)
+router.post('/criar/professor', professoresController.post)
+router.get('/professores', professoresController.listagem)
+router.get('/professores/:id', professoresController.editar)
+router.put('/professores/:id', professoresController.put)
+router.delete('/professores/:id', professoresController.delete)
 
 module.exports = router

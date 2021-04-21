@@ -33,7 +33,7 @@ const professorController = {
         })           
         return res.json(novoProfessor);
     },
-    index: async(req, res) => {
+    listagem: async(req, res) => {
         let professores = await Professor.findAll()
         return res.json(professores);
     },
