@@ -18,15 +18,19 @@ const professorController = {
         })
         return res.json(mostrarProfessor)
     },
-    // CONSEGUIMOS FAZER DE FORMA COM FILTRO SENDO OBRIGATÓRIO, QUEREMOS FAZER COM POSSIBILIDADE DE USAR SEM FILTRO
-    listAlunos: async (req, res) => {
-        const { filter } = req.params;
-        const listarAlunos = await Aluno.findAll({
-            where: {
-                nome: {[Op.like]: `%${filter}%`}
-            }
-        })
-        return res.json(listarAlunos)
+    listagemAlunos: async (req, res) => {
+        const { filter } = req.query;
+        if (filter) {
+            const listarAlunos = await Aluno.findAll({
+                where: {
+                    nome: {[Op.like]: `%${filter}%`}
+                }
+            })
+            return res.json(listarAlunos)
+        } else {
+            const listarAlunos = await Aluno.findAll()
+            return res.json(listarAlunos)
+        }
     },
     notas: (req, res) => {        
         return res.send("Página de notas")
