@@ -41,12 +41,12 @@ const professorController = {
 
         for (let nota of notas) {
             await AlunoDisciplina.update({
-                notas: nota.nota
+                nota: nota.nota
             },{
                 where: {
                     [Op.and]: [
-                        { alunos_id: id },
-                        { disciplinas_id: nota.disciplina}
+                        { aluno_id: id },
+                        { disciplina_id: nota.disciplina}
                     ]
                 }
             })
