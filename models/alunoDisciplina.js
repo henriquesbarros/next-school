@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true
         },
         notas: DataTypes.DOUBLE,
-        data_inicio: DataTypes.DATE,
-        data_final: DataTypes.DATE
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE
     },
         {
             tableName: 'alunos_disciplina',

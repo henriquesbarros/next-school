@@ -1,6 +1,8 @@
 const { Aluno, AlunoDisciplina, Disciplina, sequelize } = require('../models')
 const moduloFuncao = require('../lib/utils')
 const { QueryTypes } = require('sequelize')
+const { Op } = require('sequelize')
+
 
 const alunosController = {
     login: (req, res) => {
@@ -22,7 +24,21 @@ const alunosController = {
     },
     boletim: async (req, res) => {
         const { id } = req.params;
-        const users = await sequelize.query(`SELECT disciplinas.nome as'disciplina', alunos_disciplina.notas as 'notas'
+        const aluno = await AlunoDisciplina.findAll({
+            where: {
+                [Op.and]: [
+                    { alunos_id: 19 }
+                ]
+            },
+            group: ['notas']
+        })
+        
+        return res.json(aluno)
+
+
+
+        const users = await sequelize.query(`
+        SELECT disciplinas.nome as'disciplina', alunos_disciplina.notas as 'notas'
         from alunos_disciplina
         inner join disciplinas on disciplinas.id = disciplinas_id        
         where alunos_id =` + id,

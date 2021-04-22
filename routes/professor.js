@@ -8,6 +8,6 @@ router.get('/entrar', professoresController.login)
 router.get('/professor/:id', professoresController.show)
 router.get('/listagem', professoresController.listagemAlunos)
 router.get('/notas/:id', professoresController.notas)
-router.put('/notas/:idAluno/:idDisciplina', professoresController.putNotas)
+router.put('/notas/:id', professoresController.putNotas)
 
 module.exports = router; 

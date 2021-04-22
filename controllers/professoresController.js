@@ -1,4 +1,4 @@
-const { Professor, Aluno, sequelize } = require('../models')
+const { Professor, Aluno, AlunoDisciplina, sequelize } = require('../models')
 const { Op } = require('sequelize')
 const { QueryTypes } = require('sequelize')
 
@@ -36,11 +36,23 @@ const professorController = {
         return res.send("Página de notas")
     },    
     putNotas: async (req, res) => {
-        const { idAluno, idDisciplina } = req.params
+        const { id } = req.params
         const { notas } = req.body
-        const users = await sequelize.query(` UPDATE alunos_disciplina SET notas = `+ notas + ` WHERE alunos_id = ` + idAluno + ` and disciplinas_id = ` + idDisciplina,
-            {types: QueryTypes.UPDATE});    
-        return res.send(users)
+
+        for (let nota of notas) {
+            await AlunoDisciplina.update({
+                notas: nota.nota
+            },{
+                where: {
+                    [Op.and]: [
+                        { alunos_id: id },
+                        { disciplinas_id: nota.disciplina}
+                    ]
+                }
+            })
+        }
+
+        return res.json({ mensagem: "Atualizado com sucesso!"})  
     },
     post: async (req, res) => {
         const { nome, senha_professor, cpf, img_perfil, modulos_id } = req.body
