@@ -1,17 +1,17 @@
 module.exports = (sequelize, DataTypes) => {
     const AlunoDisciplina = sequelize.define(
         'AlunoDisciplina', {
-        alunos_id: {
+        aluno_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
             primaryKey: true
         },
-        disciplinas_id: {
+        disciplina_id: {
             type: DataTypes.INTEGER,
             foreignKey: true,
             primaryKey: true
         },
-        notas: DataTypes.DOUBLE,
+        nota: DataTypes.DOUBLE,
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE
     },
@@ -27,9 +27,9 @@ module.exports = (sequelize, DataTypes) => {
 
     AlunoDisciplina.associate = (models) => {
         // relação N:1
-        AlunoDisciplina.belongsTo(models.Aluno, { as: "nota", foreignKey: "alunos_id" })
+        AlunoDisciplina.belongsTo(models.Aluno, { as: "notas", foreignKey: "aluno_id" })
         // relação N:1
-        AlunoDisciplina.belongsTo(models.Disciplina, { as: "alunos", foreignKey: "disciplinas_id" })
+        AlunoDisciplina.belongsTo(models.Disciplina, { as: "aluno", foreignKey: "disciplina_id" })
     }
     return AlunoDisciplina;
 }

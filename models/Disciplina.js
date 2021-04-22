@@ -1,29 +1,8 @@
-// module.exports = (sequelize, DataTypes) => {
-//     const Disciplina = sequelize.define(
-//         'Disciplina', {
-//         nome: DataTypes.STRING,
-//         modulos_id: DataTypes.INTEGER
-//     },
-//         'alunos_id', {
-//             notas:DataTypes.INTEGER,
-//             data_inicio:DataTypes.DATE,
-//             data_final:DataTypes.DATE,
-//             foreignKey: true,
-//             primaryKey:true
-//         },{
-     
-//         tableName: 'disciplinas',
-//         timestamps: false
-//     }
-//     )
-
-
-
 module.exports = (sequelize, DataTypes) => {
     const Disciplina = sequelize.define(
         'Disciplina', {
         nome: DataTypes.STRING,
-        modulos_id: DataTypes.INTEGER
+        modulo_id: DataTypes.INTEGER
     },{
      
         tableName: 'disciplinas',
@@ -37,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
     
     Disciplina.associate = (models) => {
         // relação 1:n
-        Disciplina.hasMany(models.AlunoDisciplina, {as: "alunos", foreignKey: 'disciplinas_id'});
+        Disciplina.hasMany(models.AlunoDisciplina, {as: "aluno", foreignKey: 'disciplina_id'});
         // relação N:1
-        Disciplina.belongsTo(models.Modulo, {as: "modulo", foreignKey: 'modulos_id'});    
+        Disciplina.belongsTo(models.Modulo, {as: "modulo", foreignKey: 'modulo_id'});    
     }
     return Disciplina;
 } 

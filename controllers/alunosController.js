@@ -1,8 +1,4 @@
-const { Aluno, AlunoDisciplina, Disciplina, sequelize } = require('../models')
-const moduloFuncao = require('../lib/utils')
-const { QueryTypes } = require('sequelize')
-const { Op } = require('sequelize')
-
+const { Aluno, AlunoDisciplina, Disciplina, sequelize, QueryTypes } = require('../models')
 
 const alunosController = {
     login: (req, res) => {
@@ -11,39 +7,25 @@ const alunosController = {
     criar: (req, res) => {
         return res.send("Página para registrar aluno.")
     },
-    // VER COM HENDY COMO FAZER JOIN PELO SEQUELIZE    
     show: async (req, res) => {
         const { id } = req.params;
-        const users = await sequelize.query(`SELECT alunos.nome as 'nome', disciplinas.nome as'disciplina', alunos_disciplina.notas as 'notas'
-        from alunos_disciplina
-        inner join disciplinas on disciplinas.id = disciplinas_id
-        inner join alunos on alunos.id = alunos_id
-        where alunos_id =` + id,
-            {types: QueryTypes.SELECT});    
-        return res.send(users) 
+        const result = await Aluno.findOne({
+            where: { id },
+            include: "boletim"
+        })
+
+        return res.send(result)
     },
     boletim: async (req, res) => {
         const { id } = req.params;
-        const aluno = await AlunoDisciplina.findAll({
-            where: {
-                [Op.and]: [
-                    { alunos_id: 19 }
-                ]
-            },
-            group: ['notas']
-        })
-        
-        return res.json(aluno)
-
-
-
         const users = await sequelize.query(`
-        SELECT disciplinas.nome as'disciplina', alunos_disciplina.notas as 'notas'
+        SELECT disciplinas.nome as'disciplina', alunos_disciplina.nota as 'notas'
         from alunos_disciplina
         inner join disciplinas on disciplinas.id = disciplinas_id        
-        where alunos_id =` + id,
+        where aluno_id =` + id,
             {types: QueryTypes.SELECT});    
-        return res.send(users)        
+
+        return res.json(users)
     },
     post: async (req, res) => {
         const { modulos_id, nome, cpf, img_perfil } = req.body
