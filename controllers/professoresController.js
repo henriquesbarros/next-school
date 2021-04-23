@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+const { v4: uuidv4 } = require('uuid')
 const { Professor, Aluno, AlunoDisciplina, sequelize } = require('../models')
 const { Op } = require('sequelize')
 const { QueryTypes } = require('sequelize')
@@ -55,13 +57,17 @@ const professorController = {
         return res.json({ mensagem: "Atualizado com sucesso!"})  
     },
     post: async (req, res) => {
-        const { nome, senha_professor, cpf, img_perfil, modulos_id } = req.body
+        const { nome, senha_professor, cpf, img_perfil, modulo_id } = req.body;
+        const senhaCrypt = bcrypt.hashSync(senha_professor, 10)
+        const id = uuidv4()
+
         let novoProfessor = await Professor.create({
+            id,
             nome,
-            senha_professor,
+            senha_professor: senhaCrypt,
             cpf,
             img_perfil,
-            modulos_id
+            modulo_id
         })           
         return res.json(novoProfessor);
     },
@@ -74,11 +80,9 @@ const professorController = {
     },
     put: async (req, res) => {
         let { id } = req.params
-        let { nome, senha_professor, modulos_id } = req.body;
+        let { nome } = req.body;
         let atualizarProfessor = await Professor.update({
-            nome,
-            senha_professor,
-            modulos_id
+            nome
         },{
             where:{ id }
         })
