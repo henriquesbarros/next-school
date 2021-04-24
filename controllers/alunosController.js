@@ -1,8 +1,9 @@
 const { Aluno, AlunoDisciplina, Disciplina, sequelize, QueryTypes } = require('../models')
+const { modulo } = require('../lib/utils')
 
 const alunosController = {
     login: (req, res) => {
-        return res.send("Página de login do aluno.")
+        return res.render('aluno/login')
     },
     criar: (req, res) => {
         return res.send("Página para registrar aluno.")
@@ -13,8 +14,8 @@ const alunosController = {
             where: { id },
             include: "boletim"
         })
-
-        return res.send(result)
+        result.modulo_id = modulo(result.modulo_id)
+        return res.render('aluno/show', { result })
     },
     boletim: async (req, res) => {
         const { id } = req.params;

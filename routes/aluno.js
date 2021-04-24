@@ -4,8 +4,12 @@ const alunosController = require('../controllers/alunosController')
 
 //aluno
 router.get('/entrar', alunosController.login)
-router.get('/:id', alunosController.show)
-router.get('/:id/boletim', alunosController.boletim)
+// http://localhost:3000/aluno/entrar
 
+router.get('/:id', alunosController.show)
+// http://localhost:3000/aluno/:id
+
+router.get('/:id/boletim', alunosController.boletim)
+// http://localhost:3000/aluno/:id/boletim
 
 module.exports = router; 

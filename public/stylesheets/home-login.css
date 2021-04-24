@@ -1,0 +1,100 @@
+.container {
+    width: 75rem; /* 1200px */
+    margin: 0 auto;
+}
+/*=== HOME ===*/
+
+main {
+    margin-top: 18rem; /* 288px */
+}
+
+main section {
+    display: flex;
+    align-items: center;
+}
+
+main section .login {
+    width: 23.75rem; /* 380px */
+    margin-left: 8.5rem;
+}
+
+main section .login p {
+    margin-top: 2rem;
+}
+
+main section .login p a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+}
+
+main section .login .buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+main section .login .buttons a {
+    border-radius: 50px;
+}
+
+main section .login .buttons a:nth-child(2) {
+    background-color: #FFF;
+    color: var(--main-color);
+    border: 2px solid var(--main-color);
+}
+
+main figure img {
+    width: 43rem; /* 687px */
+    height: 19rem; /* 305px */
+}
+
+/*=== LOGIN ALUNO ===*/
+
+main section .login h1 {
+    font-size: 38px;
+    text-align: center;
+}
+
+main section .login form fieldset {
+    margin-top: 3.5rem;
+    display: flex;
+    background-color: #EFF0F6;
+    border: none;
+    border-radius: 16px;
+    width: 23.75rem; /* 380px */
+    height: 4rem; /* 64px */
+}
+
+main section .login form fieldset div.icon {
+    padding: 22px 24px;
+}
+
+main section .login form fieldset div.icon img {
+    width: 24px;
+    height: 24px;
+    align-self: center;
+    
+}
+
+main section .login form fieldset .input {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+main section .login form fieldset .input label {
+    font-size: 14px;
+    color: #6E7191;
+}
+
+main section .login form fieldset .input input {
+    background-color: #EFF0F6;
+    border: none;
+    font-size: 16px;
+}
+
+main section .login form button {
+    margin-top: 1rem;
+    width: 100%;
+}
