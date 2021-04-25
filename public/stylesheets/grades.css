@@ -29,20 +29,20 @@ main section.grades .box > h2 {
     flex-direction: column;
 }
 
-.box .percent {
+.box .grade {
     position: relative;
     width: 150px;
     height: 150px;
 }
 
-.box .percent svg {
+.box .grade svg {
     position: relative;
     width: 150px;
     height: 150px;
     transform: rotate(-450deg);
 }
 
-.box .percent svg circle {
+.box .grade svg circle {
     width: 150px;
     height: 150px;
     fill: none;
@@ -54,17 +54,17 @@ main section.grades .box > h2 {
     stroke-linecap: round;
 }
 
-.box .percent svg circle:nth-child(1) {
+.box .grade svg circle:nth-child(1) {
     stroke-dashoffset: 0;
     stroke: #EFF0F6;
 }
 
-.box .percent svg circle:nth-child(2) {
+.box .grade svg circle:nth-child(2) {
     /* stroke-dashoffset: calc(440 - (440 * 8) / 10); */
     stroke: #53DC98;
 }
 
-.box .percent .number {
+.box .grade .number {
     position: absolute;
     top: 0;
     left: 0;

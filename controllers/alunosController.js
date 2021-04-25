@@ -5,6 +5,9 @@ const alunosController = {
     login: (req, res) => {
         return res.render('aluno/login')
     },
+    auth: (req, res) => {
+        return res.send('Página de autenticação do login')
+    },
     criar: (req, res) => {
         return res.send("Página para registrar aluno.")
     },
@@ -77,7 +80,7 @@ const alunosController = {
     },
     delete: async (req, res) => {
         const { id } = req.params
-        const delAaluno = Aluno.destroy({
+        const delAaluno = await Aluno.destroy({
             where: {
                 id
             }

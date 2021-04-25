@@ -12,20 +12,20 @@
   <main>
     <section class="container">
       <figure>
-        <img src="/images/aluno/login-aluno.svg" alt="Imagem da logo">
+        <img src="/images/login-aluno.svg" alt="Imagem da logo">
       </figure>
       <div class="login">
           <h1>Entrar</h1>
           <form action="/aluno/entrar" method="POST">
-            <fieldset>
+            <div class="field">
                 <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
                 </div>
-                <div class="input">
+                <fieldset class="input">
                   <label for="">CPF</label>
                   <input type="text" name="cpf" placeholder="Digite seu CPF" maxlength="11">
-                </div>
-            </fieldset>
+                </fieldset>
+            </div>
             <button class="button" type="submit">Entrar</button>
           </form>
       </div> 

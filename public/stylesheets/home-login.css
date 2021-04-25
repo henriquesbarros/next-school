@@ -1,12 +1,14 @@
-.container {
-    width: 75rem; /* 1200px */
-    margin: 0 auto;
-}
 /*=== HOME ===*/
 
-main {
-    margin-top: 18rem; /* 288px */
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+/* main {
+    margin-top: 18rem; 
+} */
 
 main section {
     display: flex;
@@ -48,47 +50,53 @@ main figure img {
     height: 19rem; /* 305px */
 }
 
-/*=== LOGIN ALUNO ===*/
+/*=== LOGIN ===*/
 
 main section .login h1 {
     font-size: 38px;
     text-align: center;
 }
 
-main section .login form fieldset {
+main section .login form .field:nth-child(1) {
     margin-top: 3.5rem;
-    display: flex;
-    background-color: #EFF0F6;
-    border: none;
-    border-radius: 16px;
-    width: 23.75rem; /* 380px */
-    height: 4rem; /* 64px */
 }
 
-main section .login form fieldset div.icon {
+main section .login form .field {
+    margin-top: 1rem;
+    display: flex;
+    background-color: #EFF0F6;
+    border-radius: 16px;
+    width: 23.75rem; /* 380px */
+}
+
+main section .login form .field div.icon {
     padding: 22px 24px;
 }
 
-main section .login form fieldset div.icon img {
+main section .login form .field div.icon img {
     width: 24px;
     height: 24px;
     align-self: center;
-    
 }
 
-main section .login form fieldset .input {
+main section .login form fieldset div.icon .show-hide {
+    cursor: pointer;
+}
+
+main section .login form .field .input {
     padding: 8px 0;
+    border: none;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
 }
 
-main section .login form fieldset .input label {
+main section .login form .field .input label {
     font-size: 14px;
     color: #6E7191;
 }
 
-main section .login form fieldset .input input {
+main section .login form .field .input input {
     background-color: #EFF0F6;
     border: none;
     font-size: 16px;

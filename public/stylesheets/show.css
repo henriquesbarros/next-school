@@ -19,7 +19,8 @@ main section .text-info h1 {
 
 main section .text-info p,
 main section .grades-info .grades p,
-main section .grades-info .modules p {
+main section .grades-info .modules p,
+main section .modules-info .modules p {
     font-size: 1.5rem; /* 24px */
     font-weight: 500;
     color: #A9A9A9;
@@ -33,13 +34,19 @@ main section .grades-info {
     margin-bottom: 4rem;
 }
 
+main section .modules-info {
+    margin-top: 2rem; /* 16px */
+    margin-bottom: 4rem; /* 64px*/
+}
+
 main section .grades-info .grades,
 main section .grades-info .modules {
     text-align: center;
 }
 
 main section .grades-info .grades span,
-main section .grades-info .modules span {
+main section .grades-info .modules span,
+main section .modules-info .modules span {
     font-weight: 500;
     font-size: 1.75rem; /* 28px */
 }
@@ -47,3 +54,4 @@ main section .grades-info .modules span {
 main section a.button {
     border-radius: 50px;
 }
+

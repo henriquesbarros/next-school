@@ -6,6 +6,9 @@ const professoresController = require('../controllers/professoresController')
 router.get('/entrar', professoresController.login)
 // http://localhost:3000/professor/entrar
 
+router.post('/entrar', professoresController.auth)
+// http://localhost:3000/professor/entrar
+
 router.get('/show/:id', professoresController.show)
 // http://localhost:3000/professor/show/:id
 

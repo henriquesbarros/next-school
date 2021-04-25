@@ -6,6 +6,9 @@ const alunosController = require('../controllers/alunosController')
 router.get('/entrar', alunosController.login)
 // http://localhost:3000/aluno/entrar
 
+router.post('/entrar', alunosController.auth)
+// http://localhost:3000/aluno/entrar
+
 router.get('/:id', alunosController.show)
 // http://localhost:3000/aluno/:id
 

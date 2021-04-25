@@ -6,7 +6,10 @@ const { QueryTypes } = require('sequelize')
 
 const professorController = {
     login: (req, res) => {
-        return res.send("Página de login do professor.")
+        return res.render('professor/login')
+    },
+    auth: (req, res) => {
+        return res.send('Página de autenticação do login')
     },
     criar: (req, res) => {
         return res.send("Página para registrar professor.")
@@ -18,7 +21,7 @@ const professorController = {
                 id
             }
         })
-        return res.json(mostrarProfessor)
+        return res.render('professor/show')
     },
     listagemAlunos: async (req, res) => {
         const { filter } = req.query;
@@ -28,10 +31,10 @@ const professorController = {
                     nome: {[Op.like]: `%${filter}%`}
                 }
             })
-            return res.json(listarAlunos)
+            return res.render('professor/listing', { alunos: listarAlunos})
         } else {
             const listarAlunos = await Aluno.findAll()
-            return res.json(listarAlunos)
+            return res.render('professor/listing', { alunos: listarAlunos})
         }
     },
     notas: (req, res) => {        
