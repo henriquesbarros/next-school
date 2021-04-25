@@ -12,12 +12,18 @@
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
   width: 75rem; /* 1200px */
   margin: 0 auto;
+}
+
+.flex-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button {

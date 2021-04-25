@@ -19,14 +19,14 @@ const alunosController = {
     },
     boletim: async (req, res) => {
         const { id } = req.params;
-        const users = await sequelize.query(`
-        SELECT disciplinas.nome as'disciplina', alunos_disciplina.nota as 'notas'
-        from alunos_disciplina
-        inner join disciplinas on disciplinas.id = disciplinas_id        
-        where aluno_id =` + id,
-            {types: QueryTypes.SELECT});    
+        // const users = await sequelize.query(`
+        // SELECT disciplinas.nome as'disciplina', alunos_disciplina.nota as 'notas'
+        // from alunos_disciplina
+        // inner join disciplinas on disciplinas.id = disciplinas_id        
+        // where aluno_id =` + id,
+        //     {types: QueryTypes.SELECT});    
 
-        return res.json(users)
+        return res.render('aluno/grades')
     },
     post: async (req, res) => {
         const { modulos_id, nome, cpf, img_perfil } = req.body

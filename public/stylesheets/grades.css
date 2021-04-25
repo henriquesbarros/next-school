@@ -1,0 +1,76 @@
+main section.grades {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 3rem;
+}
+
+main > h2 {
+    margin-top: 5rem;
+    color: var(--main-color);
+}
+
+main > h1,
+main > h2 {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+main section.grades .box > h2 {
+    margin-bottom: 0.5rem;
+}
+
+.box {
+    position: relative;
+    /* width: 300px;
+    height: 400px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box .percent {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.box .percent svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    transform: rotate(-450deg);
+}
+
+.box .percent svg circle {
+    width: 150px;
+    height: 150px;
+    fill: none;
+    stroke-width: 10;
+    stroke: #53DC98;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    stroke-linecap: round;
+}
+
+.box .percent svg circle:nth-child(1) {
+    stroke-dashoffset: 0;
+    stroke: #EFF0F6;
+}
+
+.box .percent svg circle:nth-child(2) {
+    /* stroke-dashoffset: calc(440 - (440 * 8) / 10); */
+    stroke: #53DC98;
+}
+
+.box .percent .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
