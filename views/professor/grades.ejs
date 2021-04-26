@@ -11,7 +11,7 @@
 <body>
   <main>
     <h2><%= aluno.nome %> </h2>
-    <h1>FRONT-END</h1>
+    <h1><%= aluno.modulo_id %> </h1>
     <form action="/professor/notas/<%= aluno.id%>?_method=PUT" method="POST" class="grades-prof container">
         <div class="fields">
             <% for( let nota of aluno.boletim) { %>
