@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require('uuid')
 const { Professor, Aluno, AlunoDisciplina, sequelize } = require('../models')
 const { Op } = require('sequelize')
 const { QueryTypes } = require('sequelize')
+const { modulo, disciplina } = require('../lib/utils')
 
 const professorController = {
     login: (req, res) => {
@@ -37,12 +38,33 @@ const professorController = {
             return res.render('professor/listing', { alunos: listarAlunos})
         }
     },
-    notas: (req, res) => {        
-        return res.render('professor/grades')
+    notas: async (req, res) => {  
+        const { id } = req.params;
+        const result = await Aluno.findOne({
+            where: { id },
+            include: "boletim"
+        })
+        result.modulo_id = modulo(result.modulo_id)    
+        return res.render('professor/grades', { aluno: result })
     },    
     putNotas: async (req, res) => {
         const { id } = req.params
-        const { notas } = req.body
+        const { nota1, nota2, nota3, nota4 } = req.body
+        console.log(req.body)
+        const keys = Object.keys(req.body)
+        console.log(keys)
+
+        const disciplina_1 = keys[0].slice(4)
+        const disciplina_2 = keys[1].slice(4)
+        const disciplina_3 = keys[2].slice(4)
+        const disciplina_4 = keys[3].slice(4)
+
+        const notas = [
+            {"disciplina": Number(disciplina_1), "nota": Number(nota1)},
+            {"disciplina": Number(disciplina_2), "nota": Number(nota2)},
+            {"disciplina": Number(disciplina_3), "nota": Number(nota3)},
+            {"disciplina": Number(disciplina_4), "nota": Number(nota4)},
+        ]
 
         for (let nota of notas) {
             await AlunoDisciplina.update({

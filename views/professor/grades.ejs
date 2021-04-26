@@ -10,30 +10,16 @@
 </head>
 <body>
   <main>
-    <h2>John Doe</h2>
+    <h2><%= aluno.nome %> </h2>
     <h1>FRONT-END</h1>
-    <form action="/professor/notas/:id" method="POST" class="grades-prof container">
+    <form action="/professor/notas/<%= aluno.id%>?_method=PUT" method="POST" class="grades-prof container">
         <div class="fields">
-            <fieldset>
-                <label for="">HTML</label>
-                <input type="number" name="nota" id="disciplina_id">
-            </fieldset>
-            <fieldset>
-                <label for="">CSS</label>
-                <input type="number" name="nota" id="disciplina_id">
-            </fieldset>
-            <fieldset>
-                <label for="">JAVASCRIPT</label>
-                <input type="number" name="nota" id="disciplina_id">
-            </fieldset>
-            <fieldset>
-                <label for="">REACT</label>
-                <input type="number" name="nota" id="disciplina_id">
-            </fieldset>
-            <fieldset>
-                <label for="">PROJETO</label>
-                <input type="number" name="nota" id="disciplina_id">
-            </fieldset>
+            <% for( let nota of aluno.boletim) { %>
+                <fieldset>
+                    <label for=""><%= nota.disciplina_id %></label>
+                    <input type="number" name="nota<%= nota.disciplina_id %>" id="disciplina_id">
+                </fieldset>
+            <% } %>
         </div>
         <button class="button flex-center" type="submit">Enviar</button>
     </form>  

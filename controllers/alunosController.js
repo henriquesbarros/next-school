@@ -18,7 +18,7 @@ const alunosController = {
             include: "boletim"
         })
         result.modulo_id = modulo(result.modulo_id)
-        return res.render('aluno/show', { result })
+        return res.render('aluno/show', { aluno: result })
     },
     boletim: async (req, res) => {
         const { id } = req.params;
