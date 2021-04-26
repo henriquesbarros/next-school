@@ -38,7 +38,7 @@ const professorController = {
         }
     },
     notas: (req, res) => {        
-        return res.send("Página de notas")
+        return res.render('professor/grades')
     },    
     putNotas: async (req, res) => {
         const { id } = req.params

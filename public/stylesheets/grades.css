@@ -1,3 +1,9 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 main section.grades {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -5,7 +11,7 @@ main section.grades {
 }
 
 main > h2 {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
     color: var(--main-color);
 }
 
@@ -73,4 +79,52 @@ main section.grades .box > h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/*=== NOTAS PROF ===*/
+
+main form.grades-prof {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main form.grades-prof .fields{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 18rem 18rem;
+    column-gap: 10rem; /* 160px de 16 */
+    row-gap: 6rem; /* 96px de 16 */
+}
+
+main form.grades-prof fieldset {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+main form.grades-prof fieldset label {
+    font-weight: 500;
+    font-size: 1rem; /* 16px de 16*/
+    color: #6E7191;
+}
+
+main form.grades-prof fieldset input {
+    border: 2px solid #D9DBE9;
+    border-radius: 16px;
+    width: 3.5rem; /* 56px de 16 */
+    height: 2rem; /* 32px de 16 */
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+}
+
+main form.grades-prof button {
+    margin-top: 5rem;
+    border-radius: 50px;
+    background-color: #00BA88;
 }

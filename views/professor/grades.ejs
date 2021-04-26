@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXT school | Notas</title>
+  <link rel="stylesheet" href="/stylesheets/global.css">
+  <link rel="stylesheet" href="/stylesheets/grades.css">
+</head>
+<body>
+  <main>
+    <h2>John Doe</h2>
+    <h1>FRONT-END</h1>
+    <form action="/professor/notas/:id" method="POST" class="grades-prof container">
+        <div class="fields">
+            <fieldset>
+                <label for="">HTML</label>
+                <input type="number" name="nota" id="disciplina_id">
+            </fieldset>
+            <fieldset>
+                <label for="">CSS</label>
+                <input type="number" name="nota" id="disciplina_id">
+            </fieldset>
+            <fieldset>
+                <label for="">JAVASCRIPT</label>
+                <input type="number" name="nota" id="disciplina_id">
+            </fieldset>
+            <fieldset>
+                <label for="">REACT</label>
+                <input type="number" name="nota" id="disciplina_id">
+            </fieldset>
+            <fieldset>
+                <label for="">PROJETO</label>
+                <input type="number" name="nota" id="disciplina_id">
+            </fieldset>
+        </div>
+        <button class="button flex-center" type="submit">Enviar</button>
+    </form>  
+  </main> 
+</body>
+</html>
