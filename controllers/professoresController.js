@@ -49,23 +49,37 @@ const professorController = {
     },    
     putNotas: async (req, res) => {
         const { id } = req.params
-        const { nota1, nota2, nota3, nota4 } = req.body
-        console.log(req.body)
         const keys = Object.keys(req.body)
-        console.log(keys)
 
-        const disciplina_1 = keys[0].slice(4)
-        const disciplina_2 = keys[1].slice(4)
-        const disciplina_3 = keys[2].slice(4)
-        const disciplina_4 = keys[3].slice(4)
+        let disciplina_1 = 0
+        let disciplina_2 = 0
+        let disciplina_3 = 0
+        let disciplina_4 = 0
+
+        const result = Object.keys(req.body).map(key => {
+            return [req.body[key]]
+        })
+
+        if (keys[2].slice(-2) > 10 ) {
+            disciplina_1 = keys[0].slice(-2)
+            disciplina_2 = keys[1].slice(-2)
+            disciplina_3 = keys[2].slice(-2)
+            disciplina_4 = keys[3].slice(-2)
+        } else {
+            disciplina_1 = keys[0].slice(4)
+            disciplina_2 = keys[1].slice(4)
+            disciplina_3 = keys[2].slice(4)
+            disciplina_4 = keys[3].slice(4)
+        }
 
         const notas = [
-            {"disciplina": Number(disciplina_1), "nota": Number(nota1)},
-            {"disciplina": Number(disciplina_2), "nota": Number(nota2)},
-            {"disciplina": Number(disciplina_3), "nota": Number(nota3)},
-            {"disciplina": Number(disciplina_4), "nota": Number(nota4)},
+            {"disciplina": Number(disciplina_1), "nota": result[0][0]},
+            {"disciplina": Number(disciplina_2), "nota": result[1][0]},
+            {"disciplina": Number(disciplina_3), "nota": result[2][0]},
+            {"disciplina": Number(disciplina_4), "nota": result[3][0]}
         ]
 
+    
         for (let nota of notas) {
             await AlunoDisciplina.update({
                 nota: nota.nota
