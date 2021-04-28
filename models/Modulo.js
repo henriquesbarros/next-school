@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Modulo.associate = (models) => {
         //varias disciplinas para um modulo
-        Modulo.hasMany(models.Disciplina, {as: "disciplinas", foreignKey: 'modulo_id'});
+        // Modulo.hasMany(models.Disciplina, {as: "disciplinas", foreignKey: 'modulo_id'});
         //um professor para um modulo
         Modulo.belongsTo(models.Professor, {as: 'professor', foreignKey:'modulo_id'});
 

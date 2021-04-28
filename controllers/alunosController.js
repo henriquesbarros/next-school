@@ -1,5 +1,7 @@
-const { Aluno, AlunoDisciplina, Disciplina, sequelize, QueryTypes } = require('../models')
-const { modulo } = require('../lib/utils')
+const bcrypt = require('bcryptjs')
+const { v4: uuidv4 } = require('uuid')
+const { Aluno, AlunoDisciplina, Disciplina, Modulo } = require('../models')
+// const { modulo } = require('../lib/utils')
 const { Op } = require('sequelize')
 
 const alunosController = {
@@ -9,8 +11,11 @@ const alunosController = {
     auth: (req, res) => {
         return res.send('Página de autenticação do login')
     },
-    criar: (req, res) => {
-        return res.render('admin/create-student')
+    criar: async (req, res) => {
+        ///rodar pra ver no que dar
+        console.log(Modulo);
+        const modulos = await Modulo.findAll();
+        return res.render('admin/create-student', { modulos })
     },
     show: async (req, res) => {
         const { id } = req.params;
@@ -19,37 +24,32 @@ const alunosController = {
             include: "boletim"
         })
 
-        result.modulo_id = modulo(result.modulo_id)
+        // result.modulo_id = modulo(result.modulo_id)
         return res.render('aluno/show', { aluno: result })
     },
     boletim: async (req, res) => {
         const { id } = req.params;
-        // const users = await sequelize.query(`
-        // SELECT disciplinas.nome as'disciplina', alunos_disciplina.nota as 'notas'
-        // from alunos_disciplina
-        // inner join disciplinas on disciplinas.id = disciplinas_id        
-        // where aluno_id =` + id,
-        //     {types: QueryTypes.SELECT}); 
-        
         const result = await Aluno.findOne({
             where: { id },
             include: "boletim"
         })
-        result.modulo_id = modulo(result.modulo_id)
-        return res.render('aluno/grades', { aluno: result })
+        // result.modulo_id = modulo(result.modulo_id)
+        // return res.render('aluno/grades', { aluno: result })
+        return res.json(result)
     },
     post: async (req, res) => {
-        const { modulos_id, nome, cpf, img_perfil } = req.body
+        const { modulo_id, nome, cpf } = req.body
+        const { filename } = req.files
         const novoAluno = await Aluno.create({
             nome,
             cpf,
-            img_perfil,
-            modulos_id
+            img_perfil: filename,
+            modulo_id
         })
 
         const disciplinas = await Disciplina.findAll({
             where: {
-                modulos_id
+                modulo_id
             }
         })
 
