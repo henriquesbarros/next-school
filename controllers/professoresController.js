@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid')
 const { Professor, Aluno, AlunoDisciplina, sequelize } = require('../models')
 const { Op } = require('sequelize')
 const { QueryTypes } = require('sequelize')
-const { modulo, disciplina } = require('../lib/utils')
+const { modulo } = require('../lib/utils')
 
 const professorController = {
     login: (req, res) => {
@@ -13,7 +13,7 @@ const professorController = {
         return res.send('Página de autenticação do login')
     },
     criar: (req, res) => {
-        return res.send("Página para registrar professor.")
+        return res.render('admin/create-teacher')
     },
     show: async (req, res) => {
         const { id } = req.params;
@@ -112,10 +112,10 @@ const professorController = {
     },
     listagem: async(req, res) => {
         let professores = await Professor.findAll()
-        return res.json(professores);
+        return res.render('admin/teacher-listing');
     },
     editar: (req, res) => {
-        return res.send("Página para editar um aluno.")
+        return res.render('admin/teacher-edit');
     },
     put: async (req, res) => {
         let { id } = req.params

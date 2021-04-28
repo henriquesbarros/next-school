@@ -12,10 +12,10 @@
   <main>
     <section class="container flex-center">
       <figure>
-        <img src="https://avatars.githubusercontent.com/u/63408268?v=4" alt="Imagem do aluno">
+        <img src="<%= aluno.img_perfil %>" alt="Imagem do aluno">
       </figure>
       <div class="text-info">
-          <h1>Henrique Barros</h1>
+          <h1><%= aluno.nome %> </h1> 
           <p>Aluno</p>
       </div>
       <div class="grades-info">
@@ -25,10 +25,10 @@
           </div>
           <div class="modules">
               <p>Módulo</p>
-              <span>FRONT-END</span>
+              <span><%= aluno.modulo_id %> </span> 
           </div>
       </div>
-      <a href="/aluno/:id/boletim" class="button">NOTAS</a>
+      <a href="/aluno/<%= aluno.id %>/boletim" class="button">NOTAS</a>
     </section>
   </main> 
 </body>

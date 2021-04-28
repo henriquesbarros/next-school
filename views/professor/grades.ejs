@@ -16,7 +16,16 @@
         <div class="fields">
             <% for( let nota of aluno.boletim) { %>
                 <fieldset>
-                    <label for=""><%= nota.disciplina_id %></label>
+                    <label>
+                        <%= nota.disciplina_id == 1 ? "HTML" : ""%>
+                        <%= nota.disciplina_id == 2 ? "CSS" : ""%>
+                        <%= nota.disciplina_id == 3 ? "JAVASCRIPT" : ""%>
+                        <%= nota.disciplina_id == 4 ? "REACT" : ""%>
+                        <%= nota.disciplina_id == 12 ? "POSTGRE" : ""%>
+                        <%= nota.disciplina_id == 13 ? "ORACLE" : ""%>
+                        <%= nota.disciplina_id == 14 ? "MARIADB" : ""%>
+                        <%= nota.disciplina_id == 15 ? "MYSQL" : ""%>
+                    </label>
                     <input type="number" name="nota<%= nota.disciplina_id %>" id="disciplina_id">
                 </fieldset>
             <% } %>

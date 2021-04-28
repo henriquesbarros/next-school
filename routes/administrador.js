@@ -5,6 +5,7 @@ const professoresController = require('../controllers/professoresController')
 const admController = require('../controllers/admController')
 
 router.get('/entrar', admController.login)
+router.post('/entrar', admController.auth)
 // http://localhost:3000/admin/entrar
 
 router.get('/selecionar', admController.select)
@@ -13,8 +14,6 @@ router.get('/selecionar', admController.select)
 
 // Alunos
 router.get('/criar/aluno', alunosController.criar)
-// http://localhost:3000/admin/criar/aluno
-
 router.post('/criar/aluno', alunosController.post)
 // http://localhost:3000/admin/criar/aluno
 

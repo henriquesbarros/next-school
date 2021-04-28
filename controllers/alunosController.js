@@ -1,5 +1,6 @@
 const { Aluno, AlunoDisciplina, Disciplina, sequelize, QueryTypes } = require('../models')
 const { modulo } = require('../lib/utils')
+const { Op } = require('sequelize')
 
 const alunosController = {
     login: (req, res) => {
@@ -9,7 +10,7 @@ const alunosController = {
         return res.send('Página de autenticação do login')
     },
     criar: (req, res) => {
-        return res.send("Página para registrar aluno.")
+        return res.render('admin/create-student')
     },
     show: async (req, res) => {
         const { id } = req.params;
@@ -17,6 +18,7 @@ const alunosController = {
             where: { id },
             include: "boletim"
         })
+
         result.modulo_id = modulo(result.modulo_id)
         return res.render('aluno/show', { aluno: result })
     },
@@ -27,9 +29,14 @@ const alunosController = {
         // from alunos_disciplina
         // inner join disciplinas on disciplinas.id = disciplinas_id        
         // where aluno_id =` + id,
-        //     {types: QueryTypes.SELECT});    
-
-        return res.render('aluno/grades')
+        //     {types: QueryTypes.SELECT}); 
+        
+        const result = await Aluno.findOne({
+            where: { id },
+            include: "boletim"
+        })
+        result.modulo_id = modulo(result.modulo_id)
+        return res.render('aluno/grades', { aluno: result })
     },
     post: async (req, res) => {
         const { modulos_id, nome, cpf, img_perfil } = req.body
@@ -57,11 +64,22 @@ const alunosController = {
         return res.json(promisesFinalized)
     },
     listagem: async (req, res) => {
-        const alunosEncontrados = await Aluno.findAll()
-        return res.json(alunosEncontrados)
+        const { filter } = req.query;
+        if (filter) {
+            const alunosEncontrados = await Aluno.findAll({
+                where: {
+                    nome: {[Op.like]: `%${filter}%`}
+                }
+            })
+            // result.modulo_id = modulo(result.modulo_id)
+            return res.render('professor/listing', { alunos: alunosEncontrados})
+        } else {
+            const alunosEncontrados = await Aluno.findAll()
+            return res.render('admin/student-listing', { alunos: alunosEncontrados})
+        }
     },
     editar: (req, res) => {
-        return res.send("Página para editar um aluno.")
+        return res.render('admin/student-edit')
     },
     put: async (req, res) => {
         const { id } = req.params

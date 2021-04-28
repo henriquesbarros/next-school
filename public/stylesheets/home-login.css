@@ -6,10 +6,6 @@ body {
     justify-content: center;
 }
 
-/* main {
-    margin-top: 18rem; 
-} */
-
 main section {
     display: flex;
     align-items: center;
@@ -43,11 +39,6 @@ main section .login .buttons a:nth-child(2) {
     background-color: #FFF;
     color: var(--main-color);
     border: 2px solid var(--main-color);
-}
-
-main figure img {
-    width: 43rem; /* 687px */
-    height: 19rem; /* 305px */
 }
 
 /*=== LOGIN ===*/

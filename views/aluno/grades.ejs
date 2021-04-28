@@ -12,71 +12,32 @@
   <main class="container">
 
     <h2>NOTAS</h2>
-    <h1>FRONT-END</h1>
+    <h1><%= aluno.nome %> </h1>
     <section class="grades">
-        <div class="box">
-            <h2 class="text">HTML</h2>
-            <div class="grade">
-                <svg>
-                    <circle cx="70" cy="70" r="70"></circle>
-                    <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * 10) / 10);"></circle>
-                </svg>
-                <div class="number">
-                    <h2><span>10 </span>/ 10</h2>
+        <% for( let nota of aluno.boletim ) { %>
+            <div class="box">
+                <h2 class="text">
+                    <%= nota.disciplina_id == 1 ? "HTML" : "" %> 
+                    <%= nota.disciplina_id == 2 ? "CSS" : "" %> 
+                    <%= nota.disciplina_id == 3 ? "JAVASCRIPT" : "" %> 
+                    <%= nota.disciplina_id == 4 ? "REACT" : "" %> 
+                    <%= nota.disciplina_id == 12 ? "POSTGRESQL" : "" %> 
+                    <%= nota.disciplina_id == 13 ? "ORACLE" : "" %> 
+                    <%= nota.disciplina_id == 14 ? "MARIADB" : "" %> 
+                    <%= nota.disciplina_id == 15 ? "MYSQL" : "" %>
+                </h2>
+                <div class="grade"> 
+                    <svg>
+                        <circle cx="70" cy="70" r="70"></circle>
+                        <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * <%= nota.nota %>) / 10)"></circle>
+                    </svg>
+                    <div class="number">
+                        <h2><span><%= nota.nota %> </span>/ 10</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="box">
-            <h2 class="text">CSS</h2>
-            <div class="grade">
-                <svg>
-                    <circle cx="70" cy="70" r="70"></circle>
-                    <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * 8) / 10);"></circle>
-                </svg>
-                <div class="number">
-                    <h2><span>8 </span>/ 10</h2>
-                </div>
-            </div>
-        </div>
-        <div class="box">
-            <h2 class="text">JAVASCRIPT</h2>
-            <div class="grade">
-                <svg>
-                    <circle cx="70" cy="70" r="70"></circle>
-                    <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * 9) / 10);"></circle>
-                </svg>
-                <div class="number">
-                    <h2><span>9 </span>/ 10</h2>
-                </div>
-            </div>
-        </div>
-        <div class="box">
-            <h2 class="text">ANGULAR</h2>
-            <div class="grade">
-                <svg>
-                    <circle cx="70" cy="70" r="70"></circle>
-                    <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * 9) / 10);"></circle>
-                </svg>
-                <div class="number">
-                    <h2><span>9 </span>/ 10</h2>
-                </div>
-            </div>
-        </div>
-        <div class="box">
-            <h2 class="text">PROJETO</h2>
-            <div class="grade">
-                <svg>
-                    <circle cx="70" cy="70" r="70"></circle>
-                    <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * 7.5) / 10);"></circle>
-                </svg>
-                <div class="number">
-                    <h2><span>7.5 </span>/ 10</h2>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-
+        <% } %>
+    </section>    
   </main> 
 </body>
 </html>

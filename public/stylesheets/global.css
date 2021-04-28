@@ -17,6 +17,11 @@ body {
   min-height: 100vh;
 }
 
+main section figure img {
+  width: 40rem; /* 640px de 16 */
+  height: 25rem; /* 400px de 16 */
+}
+
 .container {
   width: 75rem; /* 1200px */
   margin: 0 auto;
