@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs')
 const { v4: uuidv4 } = require('uuid')
-const { Professor, Aluno, AlunoDisciplina, sequelize } = require('../models')
+const { Professor, Aluno, AlunoDisciplina, Modulo, Disciplina, sequelize } = require('../models')
 const { Op } = require('sequelize')
 const { QueryTypes } = require('sequelize')
 const { modulo } = require('../lib/utils')
@@ -12,16 +12,19 @@ const professorController = {
     auth: (req, res) => {
         return res.send('Página de autenticação do login')
     },
-    criar: (req, res) => {
-        return res.render('admin/create-teacher')
+    criar: async (req, res) => {
+        // const modulos = await sequelize.query('SELECT `id`, `nome` FROM `modulos` AS `Modulo`', {types: QueryTypes.SELECT});
+        const modulos = await Modulo.findAll();   // ta pegando os campos do model Disciplina    
+        // console.log(modulos[0])
+        return res.render('admin/create-teacher', { modulos })
     },
     show: async (req, res) => {
-        const { id } = req.params;
-        const mostrarProfessor = await Professor.findOne({
-            where: {
-                id
-            }
-        })
+        // const { id } = req.params;
+        // const mostrarProfessor = await Professor.findOne({
+        //     where: {
+        //         id
+        //     }
+        // })
         return res.render('professor/show')
     },
     listagemAlunos: async (req, res) => {
@@ -40,12 +43,21 @@ const professorController = {
     },
     notas: async (req, res) => {  
         const { id } = req.params;
-        const result = await Aluno.findOne({
+        const Notas = await Aluno.findOne({
             where: { id },
             include: "boletim"
         })
-        result.modulo_id = modulo(result.modulo_id)    
-        return res.render('professor/grades', { aluno: result })
+        const notas2 = Notas.toJSON()
+           
+        for (let resultado of notas2.boletim) {
+            const disciplinas = await Disciplina.findOne({
+                where: { id: resultado.disciplina_id }
+            })
+            Object.assign(resultado, disciplinas.toJSON() );
+           
+        }
+        // return res.render('professor/grades', { aluno: result })
+        return res.json(notas2)
     },    
     putNotas: async (req, res) => {
         const { id } = req.params

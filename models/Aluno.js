@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     Aluno.associate = (models) => {
         Aluno.hasMany(models.AlunoDisciplina,{ as: "boletim", foreignKey: "aluno_id" })
         
-        Aluno.belongsTo(models.Modulo, { as: "modulo", foreignKey: "modulo_id"})
+        // Aluno.belongsTo(models.Modulo, { as: "modulo", foreignKey: "modulo_id"})
     }
     return Aluno;
 }

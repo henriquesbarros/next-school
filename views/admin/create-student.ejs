@@ -13,7 +13,7 @@
     <section class="container flex-center">
       <div class="login">
           <h1>Registrar aluno</h1>
-          <form action="/admin/criar/aluno" method="POST">
+          <form action="/admin/criar/aluno" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
@@ -34,14 +34,16 @@
             </div>
             <select name="modulo_id" id="appearance-select">
                 <option value="" disabled selected>Selecione um módulo</option>
-                <option value="">FRONT-END</option>
-                <option value="">BACK-END</option>
-                <option value="">BANCO DE DADOS</option>
+                <% for( let modulo of modulos ) { %>
+                  <option value="<%= modulo.id %>"><%= modulo.nome %></option>
+                <% } %>
             </select>
             <div class="input-file">
+              <div id="photos-upload">
+                <input id="photo-input" type="file" name="img_perfil" accept="image/*">
                 <p>Enviar avatar</p>
-                <input type="file" name="img_perfil">
-            </div>
+              </div>
+          </div>
             <button class="button" type="submit">Registrar</button>
           </form>
       </div> 

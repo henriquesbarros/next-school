@@ -13,7 +13,7 @@
     <section class="container flex-center">
       <div class="login">
           <h1>Editar aluno</h1>
-          <form action="/admin/alunos/:id?_method=PUT" method="POST">
+          <form action="/admin/alunos/:id?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
@@ -39,8 +39,10 @@
                 <option value="">BANCO DE DADOS</option>
             </select>
             <div class="input-file">
+              <div id="photos-upload">
+                <input id="photo-input" type="file" name="img_perfil" accept="image/*">
                 <p>Enviar avatar</p>
-                <input type="file" name="img_perfil">
+              </div>
             </div>
             <button class="button" type="submit">Registrar</button>
           </form>

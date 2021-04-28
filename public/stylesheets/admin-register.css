@@ -86,27 +86,44 @@ main section .login form button {
     width: 100%;
 }
 
+/* PHOTOS UPLOAD */
+
 main section .login .input-file {
+    margin: 1rem 0 2rem 0;
     display: flex;
-    margin: 1.5rem 0 2rem 0;
-    text-align: center;
-    position: relative;
-    padding: 0.75rem 0; 
-    background-color: #FFF;
-    border-radius: 50px;
-    border: 3px solid var(--main-color); 
-    color: var(--main-color);
-    font-weight: 500;
+    justify-content: center;
 }
 
-main section .login input[type="file"] {
-    opacity: 0;
+main section .login .input-file #photos-upload {
+    position: relative;
+
+    display: block;
+    overflow: hidden;
+
+    width: 12.5rem; /* 200px de 16 */
+}
+
+main section .login .input-file #photos-upload p {
+    font-size: 1rem;
+    text-align: center;
+    color: var(--main-color);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    border: 3px solid var(--main-color);
+    width: 12.5rem; /* 200px de 16 */
+}
+
+main section .login .input-file #photo-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: block;
     overflow: hidden;
     width: 100%;
     height: 100%;
-}
+    opacity: 0;
 
-main section .login .input-file p {
-    position: absolute;
-    left: 35%;
+    cursor: pointer;
 }
