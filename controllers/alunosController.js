@@ -1,19 +1,23 @@
-const bcrypt = require('bcryptjs')
 const { v4: uuidv4 } = require('uuid')
-const { Aluno, AlunoDisciplina, Disciplina, Modulo } = require('../models')
-// const { modulo } = require('../lib/utils')
+const { Aluno, AlunoDisciplina, Disciplina, Professor, Modulo } = require('../models')
+ const { modulo } = require('../lib/utils')
 const { Op } = require('sequelize')
+
 
 const alunosController = {
     login: (req, res) => {
         return res.render('aluno/login')
     },
-    auth: (req, res) => {
-        return res.send('Página de autenticação do login')
+    auth: async (req, res) => {
+        const {cpf} = req.body;
+        const validarLogin = await Aluno.findOne({
+            where: {cpf}
+        }) 
+
+        return res.redirect(`${validarLogin.id}`)
     },
     criar: async (req, res) => {
         ///rodar pra ver no que dar
-        console.log(Modulo);
         const modulos = await Modulo.findAll();
         return res.render('admin/create-student', { modulos })
     },
@@ -23,8 +27,15 @@ const alunosController = {
             where: { id },
             include: "boletim"
         })
-
-        // result.modulo_id = modulo(result.modulo_id)
+        let media = 0;
+        for(let i =0; i < result.boletim.length; i++){
+            media += result.boletim[i].nota;
+         //   console.log(result.boletim[1]);
+        }
+        const mediaFinal = media / result.boletim.length;
+        result.boletim[0].nota = mediaFinal;
+        //console.log(mediaFinal);
+        result.modulo_id = modulo(result.modulo_id)
         return res.render('aluno/show', { aluno: result })
     },
     boletim: async (req, res) => {
@@ -34,13 +45,29 @@ const alunosController = {
             include: "boletim"
         })
         // result.modulo_id = modulo(result.modulo_id)
-        // return res.render('aluno/grades', { aluno: result })
-        return res.json(result)
+        //  return res.render('aluno/grades', { aluno: result })
+        const notasJson = Notas.toJSON()        
+    
+        for (let resultado of notasJson.boletim) {
+            const disciplinas = await Disciplina.findOne({
+                where: { id: resultado.disciplina_id }
+            })
+            const alunos = await Aluno.findOne({
+                where:{id: resultado.aluno_id}
+            })
+            const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
+            notasAluno.push(obj)
+       }
+       //console.log(nomeDisciplina);
+         return res.render('professor/grades', { notasAluno})         
+        //return res.(result)
     },
     post: async (req, res) => {
-        const { modulo_id, nome, cpf } = req.body
+        const {id, modulo_id, nome, cpf } = req.body
         const { filename } = req.files
+        // const id = uuidv4() //DAR ERRO QUANDO DEIXO ATIVADO
         const novoAluno = await Aluno.create({
+            // id,
             nome,
             cpf,
             img_perfil: filename,

@@ -16,16 +16,7 @@
     <section class="grades">
         <% for( let nota of aluno.boletim ) { %>
             <div class="box">
-                <h2 class="text">
-                    <%= nota.disciplina_id == 1 ? "HTML" : "" %> 
-                    <%= nota.disciplina_id == 2 ? "CSS" : "" %> 
-                    <%= nota.disciplina_id == 3 ? "JAVASCRIPT" : "" %> 
-                    <%= nota.disciplina_id == 4 ? "REACT" : "" %> 
-                    <%= nota.disciplina_id == 12 ? "POSTGRESQL" : "" %> 
-                    <%= nota.disciplina_id == 13 ? "ORACLE" : "" %> 
-                    <%= nota.disciplina_id == 14 ? "MARIADB" : "" %> 
-                    <%= nota.disciplina_id == 15 ? "MYSQL" : "" %>
-                </h2>
+                <h2 class="text"><%= nota.nome %> </h2>
                 <div class="grade"> 
                     <svg>
                         <circle cx="70" cy="70" r="70"></circle>

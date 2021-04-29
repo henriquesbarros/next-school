@@ -15,13 +15,13 @@
         <img src="<%= aluno.img_perfil %>" alt="Imagem do aluno">
       </figure>
       <div class="text-info">
-          <h1><%= aluno.nome %> </h1> 
+          <h1><%= aluno.nome_aluno %> </h1> 
           <p>Aluno</p>
       </div>
       <div class="grades-info">
           <div class="grades">
               <p>Média</p>
-              <span>9.5</span>
+              <span><%= aluno.boletim[0].nota  %> </span>
           </div>
           <div class="modules">
               <p>Módulo</p>

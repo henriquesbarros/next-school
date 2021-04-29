@@ -10,23 +10,15 @@
 </head>
 <body>
   <main>
-    <h2><%= aluno.nome %> </h2>
-    <h1><%= aluno.modulo_id %> </h1>
-    <form action="/professor/notas/<%= aluno.id%>?_method=PUT" method="POST" class="grades-prof container">
+    <h2><%= notasAluno[0].nome_aluno %> </h2>
+    
+    <form action="/professor/notas/<%= notasAluno[0].aluno_id%>?_method=PUT" method="POST" class="grades-prof container">
         <div class="fields">
-            <% for( let nota of aluno.boletim) { %>
+            <% for( let nota of notasAluno) { %>
                 <fieldset>
-                    <label>
-                        <%= nota.disciplina_id == 1 ? "HTML" : ""%>
-                        <%= nota.disciplina_id == 2 ? "CSS" : ""%>
-                        <%= nota.disciplina_id == 3 ? "JAVASCRIPT" : ""%>
-                        <%= nota.disciplina_id == 4 ? "REACT" : ""%>
-                        <%= nota.disciplina_id == 12 ? "POSTGRE" : ""%>
-                        <%= nota.disciplina_id == 13 ? "ORACLE" : ""%>
-                        <%= nota.disciplina_id == 14 ? "MARIADB" : ""%>
-                        <%= nota.disciplina_id == 15 ? "MYSQL" : ""%>
-                    </label>
+                  <label for=""><%= nota.nome %> </label>
                     <input type="number" name="nota<%= nota.disciplina_id %>" id="disciplina_id">
+                  
                 </fieldset>
             <% } %>
         </div>

@@ -128,3 +128,10 @@ main form.grades-prof button {
     border-radius: 50px;
     background-color: #00BA88;
 }
+
+@media (max-width: 768px){
+
+    body main.container{
+        max-width: 768px;
+    }
+}

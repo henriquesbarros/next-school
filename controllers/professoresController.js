@@ -14,8 +14,7 @@ const professorController = {
     },
     criar: async (req, res) => {
         // const modulos = await sequelize.query('SELECT `id`, `nome` FROM `modulos` AS `Modulo`', {types: QueryTypes.SELECT});
-        const modulos = await Modulo.findAll();   // ta pegando os campos do model Disciplina    
-        // console.log(modulos[0])
+        const modulos = await Modulo.findAll();
         return res.render('admin/create-teacher', { modulos })
     },
     show: async (req, res) => {
@@ -32,33 +31,37 @@ const professorController = {
         if (filter) {
             const listarAlunos = await Aluno.findAll({
                 where: {
-                    nome: {[Op.like]: `%${filter}%`}
+                    nome: { [Op.like]: `%${filter}%` }
                 }
             })
-            return res.render('professor/listing', { alunos: listarAlunos})
+            return res.render('professor/listing', { alunos: listarAlunos })
         } else {
             const listarAlunos = await Aluno.findAll()
-            return res.render('professor/listing', { alunos: listarAlunos})
+            return res.render('professor/listing', { alunos: listarAlunos })
         }
     },
-    notas: async (req, res) => {  
+    notas: async (req, res) => {
+        const notasAluno = []
         const { id } = req.params;
         const Notas = await Aluno.findOne({
             where: { id },
             include: "boletim"
         })
-        const notas2 = Notas.toJSON()
-           
-        for (let resultado of notas2.boletim) {
+       const notasJson = Notas.toJSON()        
+
+        for (let resultado of notasJson.boletim) {
             const disciplinas = await Disciplina.findOne({
                 where: { id: resultado.disciplina_id }
             })
-            Object.assign(resultado, disciplinas.toJSON() );
-           
-        }
-        // return res.render('professor/grades', { aluno: result })
-        return res.json(notas2)
-    },    
+            const alunos = await Aluno.findOne({
+                where:{id: resultado.aluno_id}
+            })
+            const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
+            notasAluno.push(obj)
+       }
+       //console.log(nomeDisciplina);
+         return res.render('professor/grades', { notasAluno})
+    },
     putNotas: async (req, res) => {
         const { id } = req.params
         const keys = Object.keys(req.body)
@@ -72,7 +75,7 @@ const professorController = {
             return [req.body[key]]
         })
 
-        if (keys[2].slice(-2) > 10 ) {
+        if (keys[2].slice(-2) > 10) {
             disciplina_1 = keys[0].slice(-2)
             disciplina_2 = keys[1].slice(-2)
             disciplina_3 = keys[2].slice(-2)
@@ -85,27 +88,27 @@ const professorController = {
         }
 
         const notas = [
-            {"disciplina": Number(disciplina_1), "nota": result[0][0]},
-            {"disciplina": Number(disciplina_2), "nota": result[1][0]},
-            {"disciplina": Number(disciplina_3), "nota": result[2][0]},
-            {"disciplina": Number(disciplina_4), "nota": result[3][0]}
+            { "disciplina": Number(disciplina_1), "nota": result[0][0] },
+            { "disciplina": Number(disciplina_2), "nota": result[1][0] },
+            { "disciplina": Number(disciplina_3), "nota": result[2][0] },
+            { "disciplina": Number(disciplina_4), "nota": result[3][0] }
         ]
 
-    
+
         for (let nota of notas) {
             await AlunoDisciplina.update({
                 nota: nota.nota
-            },{
+            }, {
                 where: {
                     [Op.and]: [
                         { aluno_id: id },
-                        { disciplina_id: nota.disciplina}
+                        { disciplina_id: nota.disciplina }
                     ]
                 }
             })
         }
 
-        return res.json({ mensagem: "Atualizado com sucesso!"})  
+        return res.json({ mensagem: "Atualizado com sucesso!" })
     },
     post: async (req, res) => {
         const { nome, senha_professor, cpf, img_perfil, modulo_id } = req.body;
@@ -119,10 +122,10 @@ const professorController = {
             cpf,
             img_perfil,
             modulo_id
-        })           
+        })
         return res.json(novoProfessor);
     },
-    listagem: async(req, res) => {
+    listagem: async (req, res) => {
         let professores = await Professor.findAll()
         return res.render('admin/teacher-listing');
     },
@@ -134,19 +137,18 @@ const professorController = {
         let { nome } = req.body;
         let atualizarProfessor = await Professor.update({
             nome
-        },{
-            where:{ id }
+        }, {
+            where: { id }
         })
         return res.send(atualizarProfessor);
     },
-    delete: async(req, res) => {
-        let{ id } = req.params;
+    delete: async (req, res) => {
+        let { id } = req.params;
         let deleteProfessor = await Professor.destroy({
-            where:{ id }
+            where: { id }
         })
         return res.json(deleteProfessor);
     }
 }
 
 module.exports = professorController
-           
