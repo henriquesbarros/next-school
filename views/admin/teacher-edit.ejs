@@ -13,14 +13,14 @@
     <section class="container flex-center">
       <div class="login">
           <h1>Editar professor</h1>
-          <form action="/admin/professores/:id?_method=PUT" method="POST" enctype="multipart/form-data">
+          <form action="/admin/professores/<%= professor.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
                 </div>
                 <fieldset class="input">
                   <label for="">Nome completo</label>
-                  <input type="text" name="codigo" placeholder="Digite seu código" maxlength="11">
+                  <input type="text" name="codigo" value="<%= professor.nome %>" placeholder="Digite seu código">
                 </fieldset>
             </div>
             <div class="field">
@@ -29,14 +29,14 @@
                 </div>
                 <fieldset class="input">
                     <label for="">CPF</label>
-                    <input type="password" name="cpf" placeholder="Digite seu CPF">
+                    <input type="text" name="cpf" value="<%= professor.cpf %>" placeholder="Digite seu CPF">
                 </fieldset>
             </div>
             <select name="modulo_id" id="appearance-select">
-                <option value="" disabled selected>Selecione um módulo</option>
-                <option value="">FRONT-END</option>
-                <option value="">BACK-END</option>
-                <option value="">BANCO DE DADOS</option>
+                <option value="" disabled>Selecione um módulo</option>
+                <% for( let i = 0; i < modulos.length; i++ ) { %>
+                  <option value="<%= i + 1 %>" <% professor.modulo_id == i ? 'selected' : ''%> ><%= modulos[i].nome %></option>
+                <% } %>
             </select>
             <div class="field password">
                 <div class="icon" id="toggle" onclick="showHide()">
@@ -49,7 +49,7 @@
             </div>
             <div class="input-file">
               <div id="photos-upload">
-                <input id="photo-input" type="file" name="img_perfil" accept="image/*">
+                <input id="photo-input" type="file" name="img_perfil" accept="image/*" value="<%= professor.img_perfil %>">
                 <p>Enviar avatar</p>
               </div>
             </div>
@@ -73,6 +73,12 @@
           toggle.classList.remove('hide')
           img.src = '/images/icons/show-password.svg'
         }
+    }
+
+    const input = document.querySelector('#photo-input')
+    const p = document.querySelector('.input-file p')
+    function addPhoto(event) {
+      p.innerText = "Avatar enviado"
     }
 </script>
 </body>

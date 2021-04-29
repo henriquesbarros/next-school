@@ -18,13 +18,14 @@ const professorController = {
         return res.render('admin/create-teacher', { modulos })
     },
     show: async (req, res) => {
-        // const { id } = req.params;
-        // const mostrarProfessor = await Professor.findOne({
-        //     where: {
-        //         id
-        //     }
-        // })
-        return res.render('professor/show')
+        const { id } = req.params;
+        const mostrarProfessor = await Professor.findOne({
+            where: {
+                id
+            }
+        })
+        mostrarProfessor.modulo_id = modulo(mostrarProfessor.modulo_id)
+        return res.render('professor/show', { professor: mostrarProfessor })
     },
     listagemAlunos: async (req, res) => {
         const { filter } = req.query;
@@ -114,33 +115,42 @@ const professorController = {
         const { nome, senha_professor, cpf, img_perfil, modulo_id } = req.body;
         const senhaCrypt = bcrypt.hashSync(senha_professor, 10)
         const id = uuidv4()
-
+        const { filename } = req.file
         let novoProfessor = await Professor.create({
             id,
             nome,
             senha_professor: senhaCrypt,
             cpf,
-            img_perfil,
+            img_perfil: filename,
             modulo_id
         })
-        return res.json(novoProfessor);
+        return res.redirect('/admin/professores')
     },
     listagem: async (req, res) => {
         let professores = await Professor.findAll()
-        return res.render('admin/teacher-listing');
+        return res.render('admin/teacher-listing', { professores });
     },
-    editar: (req, res) => {
-        return res.render('admin/teacher-edit');
+    editar: async (req, res) => {
+        const { id } = req.params
+        const professor = await Professor.findOne({
+            where: { id }
+        })
+
+        const modulos = await Modulo.findAll()
+        return res.render('admin/teacher-edit', { professor, modulos })
     },
     put: async (req, res) => {
         let { id } = req.params
-        let { nome } = req.body;
+        let { nome, cpf, modulo_id, senha_professor } = req.body;
         let atualizarProfessor = await Professor.update({
-            nome
+            nome,
+            cpf,
+            modulo_id,
+            senha_professor
         }, {
             where: { id }
         })
-        return res.send(atualizarProfessor);
+        return res.redirect(`${id}`)
     },
     delete: async (req, res) => {
         let { id } = req.params;

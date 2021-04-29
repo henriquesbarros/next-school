@@ -16,8 +16,23 @@
             <input type="text" name="filter" placeholder="Buscar">
             <button type="submit"><img src="/images/icons/search.svg" alt="Ícone de pesquisa"></button>
         </form>
+        
         <div class="listing">
-            <a href="/professor/notas/:id">
+            <% for( let professor of professores ) { %>
+                <a href="/admin/professores/<%= professor.id %> ">
+                    <div class="student scale">
+                        <div class="info">
+                            <span><%= professor.nome %></span>
+                            <span><%= professor.cpf %></span>
+                            <span><%= professor.modulo_id %></span>
+                        </div>
+                        <img src="/images/icons/edit.svg" alt="Ícone de edição">
+                    </div>
+                </a>
+            <% } %>
+            
+            
+            <!-- <a href="/professor/notas/:id">
                 <div class="student scale">
                     <div class="info">
                         <span>Henrique Santos</span>
@@ -38,17 +53,6 @@
                     <img src="/images/icons/edit.svg" alt="Ícone de edição">
                 </div>
             </a>
-            
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
 
             <a href="/professor/notas/:id">
                 <div class="student scale">
@@ -103,7 +107,7 @@
                     </div>
                     <img src="/images/icons/edit.svg" alt="Ícone de edição">
                 </div>
-            </a>
+            </a> -->
         </div>
     </section>
   </main> 

@@ -20,7 +20,7 @@
                 </div>
                 <fieldset class="input">
                   <label for="">Nome completo</label>
-                  <input type="text" name="codigo" placeholder="Digite seu nome" maxlength="11">
+                  <input type="text" name="nome" placeholder="Digite seu nome" maxlength="11">
                 </fieldset>
             </div>
             <div class="field">
@@ -29,7 +29,7 @@
                 </div>
                 <fieldset class="input">
                     <label for="">CPF</label>
-                    <input type="password" name="cpf" placeholder="Digite seu CPF">
+                    <input type="text" name="cpf" placeholder="Digite seu CPF">
                 </fieldset>
             </div>
             <select name="modulo_id" id="appearance-select">
@@ -81,7 +81,8 @@
         }
     }
 
-    const input = document.querySelector('.input-file p')
+    const input = document.querySelector('#photo-input')
+    const p = document.querySelector('.input-file p')
 
     function addPhoto(event) {
       p.innerText = "Avatar enviado"

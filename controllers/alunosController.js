@@ -9,9 +9,9 @@ const alunosController = {
         return res.render('aluno/login')
     },
     auth: async (req, res) => {
-        const {cpf} = req.body;
+        const { cpf } = req.body;
         const validarLogin = await Aluno.findOne({
-            where: {cpf}
+            where: { cpf }
         }) 
 
         return res.redirect(`${validarLogin.id}`)

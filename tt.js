@@ -131,3 +131,9 @@
 
         // console.log(nota);
         
+
+        // ${Data.now().toString()}-
+
+        // <option value="" <% professor.modulo_id == 1 ? 'selected' : ''%> >FRONT-END</option>
+        // <option value="" <% professor.modulo_id == 2 ? 'selected' : ''%> >BACK-END</option>
+        // <option value="" <% professor.modulo_id == 3 ? 'selected' : ''%> >BANCO DE DADOS</option>

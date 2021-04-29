@@ -5,7 +5,7 @@ const storage = multer.diskStorage({
         cb(null, './public/images/usuarios')
     },
     filename: (req, file, cb) => {
-        cb(null, `${Data.now().toString()}-${file.originalname}`)
+        cb(null, `${file.originalname}`)
     }
 })
 
