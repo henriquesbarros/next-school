@@ -12,11 +12,10 @@
   <main>
     <section class="container flex-center">
         <h1>Listagem</h1>
-        <form action="/admin/alunos" method="GET">
+        <form action="/admin/professores" method="GET">
             <input type="text" name="filter" placeholder="Buscar">
             <button type="submit"><img src="/images/icons/search.svg" alt="Ícone de pesquisa"></button>
         </form>
-        
         <div class="listing">
             <% for( let professor of professores ) { %>
                 <a href="/admin/professores/<%= professor.id %> ">
@@ -30,84 +29,6 @@
                     </div>
                 </a>
             <% } %>
-            
-            
-            <!-- <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-            
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a> -->
         </div>
     </section>
   </main> 

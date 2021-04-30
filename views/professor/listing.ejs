@@ -17,93 +17,18 @@
             <button type="submit"><img src="/images/icons/search.svg" alt="Ícone de pesquisa"></button>
         </form>
         <div class="listing">
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
+            <% for( let aluno of alunos ) { %>
+                <a href="/professor/notas/<%= aluno.id %> ">
+                    <div class="student scale">
+                        <div class="info">
+                            <span><%= aluno.nome %></span>
+                            <span><%= aluno.cpf %></span>
+                            <span><%= aluno.modulo_id %></span>
+                        </div>
+                        <img src="/images/icons/edit.svg" alt="Ícone de edição">
                     </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-            
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-            
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
-
-            <a href="/professor/notas/:id">
-                <div class="student scale">
-                    <div class="info">
-                        <span>Henrique Santos</span>
-                        <span>999.999.999-99</span>
-                        <span>FRONT-END</span>
-                    </div>
-                    <img src="/images/icons/edit.svg" alt="Ícone de edição">
-                </div>
-            </a>
+                </a>
+            <% } %>
         </div>
     </section>
   </main> 

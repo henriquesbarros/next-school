@@ -18,7 +18,7 @@ router.get('/criar/aluno', alunosController.criar)
 router.post('/criar/aluno', multer.single("img_perfil"), alunosController.post)
 // http://localhost:3000/admin/criar/aluno
 
-router.get('/alunos', alunosController.listagem)
+router.get('/alunos', alunosController.listagemAdminAlunos)
 // http://localhost:3000/admin/alunos
 
 router.get('/alunos/:id', alunosController.editar)
@@ -32,7 +32,7 @@ router.get('/criar/professor', professoresController.criar)
 router.post('/criar/professor', multer.single("img_perfil"), professoresController.post)
 // http://localhost:3000/admin/criar/professor
 
-router.get('/professores', professoresController.listagem)
+router.get('/professores', professoresController.listagemAdminProfessores)
 // http://localhost:3000/admin/professores
 
 router.get('/professores/:id', professoresController.editar)

@@ -29,17 +29,22 @@ const professorController = {
     },
     listagemAlunos: async (req, res) => {
         const { filter } = req.query;
+        let alunos = []
         if (filter) {
-            const listarAlunos = await Aluno.findAll({
+            alunos = await Aluno.findAll({
                 where: {
                     nome: { [Op.like]: `%${filter}%` }
                 }
             })
-            return res.render('professor/listing', { alunos: listarAlunos })
         } else {
-            const listarAlunos = await Aluno.findAll()
-            return res.render('professor/listing', { alunos: listarAlunos })
+            alunos = await Aluno.findAll()
         }
+
+        alunos.map(aluno => {
+            aluno.modulo_id = modulo(aluno.modulo_id)
+        })
+
+        return res.render('professor/listing', { alunos })
     },
     notas: async (req, res) => {
         const notasAluno = []
@@ -48,7 +53,7 @@ const professorController = {
             where: { id },
             include: "boletim"
         })
-       const notasJson = Notas.toJSON()        
+        const notasJson = Notas.toJSON()        
 
         for (let resultado of notasJson.boletim) {
             const disciplinas = await Disciplina.findOne({
@@ -59,9 +64,9 @@ const professorController = {
             })
             const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
             notasAluno.push(obj)
-       }
-       //console.log(nomeDisciplina);
-         return res.render('professor/grades', { notasAluno})
+        }
+        //console.log(nomeDisciplina);
+        return res.render('professor/grades', { notasAluno})
     },
     putNotas: async (req, res) => {
         const { id } = req.params
@@ -126,9 +131,26 @@ const professorController = {
         })
         return res.redirect('/admin/professores')
     },
-    listagem: async (req, res) => {
-        let professores = await Professor.findAll()
-        return res.render('admin/teacher-listing', { professores });
+    listagemAdminProfessores: async (req, res) => {
+        const { filter } = req.query;
+
+        let professores = []
+
+        if (filter) {
+            professores = await Professor.findAll({
+                where: {
+                    nome: { [Op.like]: `%${filter}%` }
+                }
+            })
+        } else {
+            professores = await Professor.findAll()
+        }
+
+        professores.map(professor => {
+            professor.modulo_id = modulo(professor.modulo_id)
+        })
+
+        return res.render('admin/teacher-listing', { professores })
     },
     editar: async (req, res) => {
         const { id } = req.params

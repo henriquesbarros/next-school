@@ -90,20 +90,26 @@ const alunosController = {
         const promisesFinalized = await Promise.all(alunoDiscPromise)
         return res.json(promisesFinalized)
     },
-    listagem: async (req, res) => {
+    listagemAdminAlunos: async (req, res) => {
         const { filter } = req.query;
+
+        let alunos = []
+
         if (filter) {
-            const alunosEncontrados = await Aluno.findAll({
+            alunos = await Aluno.findAll({
                 where: {
                     nome: {[Op.like]: `%${filter}%`}
                 }
             })
-            // result.modulo_id = modulo(result.modulo_id)
-            return res.render('professor/listing', { alunos: alunosEncontrados})
         } else {
-            const alunosEncontrados = await Aluno.findAll()
-            return res.render('admin/student-listing', { alunos: alunosEncontrados})
+            alunos = await Aluno.findAll()
         }
+
+        alunos.map(aluno => {
+            aluno.modulo_id = modulo(aluno.modulo_id)
+        })
+
+        return res.render('admin/student-listing', { alunos })
     },
     editar: (req, res) => {
         return res.render('admin/student-edit')
