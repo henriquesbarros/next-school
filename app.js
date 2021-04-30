@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const methodOverride = require('method-override')
+const session = require('express-session')
 
 // CONFIGURAR AS ROTAS
 const index = require('./routes/index');
@@ -16,6 +17,12 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+app.use(session({ 
+  secret: "next-school",
+  saveUninitialized: true,
+  resave: true 
+}))
 
 app.use(methodOverride('_method'))
 app.use(logger('dev'));

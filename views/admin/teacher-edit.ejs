@@ -20,7 +20,7 @@
                 </div>
                 <fieldset class="input">
                   <label for="">Nome completo</label>
-                  <input type="text" name="codigo" value="<%= professor.nome %>" placeholder="Digite seu código">
+                  <input type="text" name="nome" value="<%= professor.nome %>" placeholder="Digite seu código">
                 </fieldset>
             </div>
             <div class="field">
@@ -34,8 +34,8 @@
             </div>
             <select name="modulo_id" id="appearance-select">
                 <option value="" disabled>Selecione um módulo</option>
-                <% for( let i = 0; i < modulos.length; i++ ) { %>
-                  <option value="<%= i + 1 %>" <% professor.modulo_id == i ? 'selected' : ''%> ><%= modulos[i].nome %></option>
+                <% for ( let modulo of modulos ) { %>
+                  <option value="<%= modulo.id %>" <%= professor.modulo_id == modulo.id ? 'selected' : '' %>  ><%= modulo.nome %></option>
                 <% } %>
             </select>
             <div class="field password">
@@ -49,11 +49,22 @@
             </div>
             <div class="input-file">
               <div id="photos-upload">
-                <input id="photo-input" type="file" name="img_perfil" accept="image/*" value="<%= professor.img_perfil %>">
+                <input 
+                  id="photo-input" 
+                  type="file" 
+                  name="img_perfil" 
+                  accept="image/*" 
+                  value="<%= professor.img_perfil %>"
+                  onchange="addPhoto(event)"  
+                >
                 <p>Enviar avatar</p>
               </div>
             </div>
-            <button class="button" type="submit">Registrar</button>
+            <button class="button" type="submit">Editar</button>
+          </form>
+          <form action="/admin/professores/<%= professor.id %>?_method=DELETE" method="POST">
+            <button class="button" type="submit" style="background-color: red;">Deletar</button>
+            <input type="hidden" name="id" value="<%= professor.id %>">
           </form>
       </div> 
     </section>

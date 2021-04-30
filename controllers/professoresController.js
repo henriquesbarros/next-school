@@ -1,16 +1,29 @@
 const bcrypt = require('bcryptjs')
 const { v4: uuidv4 } = require('uuid')
-const { Professor, Aluno, AlunoDisciplina, Modulo, Disciplina, sequelize } = require('../models')
+const fs = require('fs')
+const { Professor, Aluno, AlunoDisciplina, Modulo, Disciplina } = require('../models')
 const { Op } = require('sequelize')
-const { QueryTypes } = require('sequelize')
 const { modulo } = require('../lib/utils')
 
 const professorController = {
     login: (req, res) => {
         return res.render('professor/login')
     },
-    auth: (req, res) => {
-        return res.send('Página de autenticação do login')
+    auth: async (req, res) => {
+        const { cpf, senha_professor } = req.body
+
+        const usuario = await Professor.findOne({
+            where: {
+                cpf
+            }
+        })
+
+        if ( usuario && bcrypt.compareSync(senha_professor, usuario.senha_professor)) {
+            req.session.usuarioLogado = usuario
+            return res.redirect(`/professor/show/${usuario.id}`)
+        } else {
+            return res.redirect('/professor/entrar')
+        }
     },
     criar: async (req, res) => {
         // const modulos = await sequelize.query('SELECT `id`, `nome` FROM `modulos` AS `Modulo`', {types: QueryTypes.SELECT});
@@ -33,7 +46,7 @@ const professorController = {
         if (filter) {
             alunos = await Aluno.findAll({
                 where: {
-                    nome: { [Op.like]: `%${filter}%` }
+                    nome_aluno: { [Op.like]: `%${filter}%` }
                 }
             })
         } else {
@@ -65,8 +78,11 @@ const professorController = {
             const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
             notasAluno.push(obj)
         }
-        //console.log(nomeDisciplina);
-        return res.render('professor/grades', { notasAluno})
+        notasAluno.map(notaAluno => {
+            notaAluno.modulo_id = modulo(notaAluno.modulo_id)
+        })
+        console.log(notasAluno)
+        return res.render('professor/grades', { notasAluno })
     },
     putNotas: async (req, res) => {
         const { id } = req.params
@@ -117,11 +133,11 @@ const professorController = {
         return res.json({ mensagem: "Atualizado com sucesso!" })
     },
     post: async (req, res) => {
-        const { nome, senha_professor, cpf, img_perfil, modulo_id } = req.body;
+        const { nome, senha_professor, cpf, modulo_id } = req.body;
         const senhaCrypt = bcrypt.hashSync(senha_professor, 10)
         const id = uuidv4()
         const { filename } = req.file
-        let novoProfessor = await Professor.create({
+        await Professor.create({
             id,
             nome,
             senha_professor: senhaCrypt,
@@ -164,22 +180,40 @@ const professorController = {
     put: async (req, res) => {
         let { id } = req.params
         let { nome, cpf, modulo_id, senha_professor } = req.body;
-        let atualizarProfessor = await Professor.update({
+        let  { filename } = req.file
+
+        const professor = await Professor.findOne({
+            where: { id }
+        })
+
+        if (filename) {
+            fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+        }
+
+        await Professor.update({
             nome,
+            senha_professor,
             cpf,
-            modulo_id,
-            senha_professor
+            img_perfil: filename,
+            modulo_id
         }, {
             where: { id }
         })
-        return res.redirect(`${id}`)
+        return res.redirect('/admin/professores')
     },
     delete: async (req, res) => {
         let { id } = req.params;
-        let deleteProfessor = await Professor.destroy({
+
+        const professor = await Professor.findOne({
             where: { id }
         })
-        return res.json(deleteProfessor);
+
+        fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+
+        await Professor.destroy({
+            where: { id }
+        })
+        return res.redirect('/admin/professores')
     }
 }
 

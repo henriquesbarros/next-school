@@ -20,7 +20,7 @@
                 </div>
                 <fieldset class="input">
                   <label for="">Nome completo</label>
-                  <input type="text" name="codigo" placeholder="Digite seu código" maxlength="11">
+                  <input type="text" name="nome_aluno" placeholder="Digite seu código" value="<%= aluno.nome_aluno %> ">
                 </fieldset>
             </div>
             <div class="field">
@@ -29,14 +29,15 @@
                 </div>
                 <fieldset class="input">
                     <label for="">CPF</label>
-                    <input type="password" id="password" name="cpf" placeholder="Digite seu CPF">
+                    <input type="text" id="password" name="cpf" placeholder="Digite seu CPF" value="<%= aluno.cpf %> ">
                 </fieldset>
             </div>
             <select name="modulo_id" id="appearance-select">
-                <option value="" disabled selected>Selecione um módulo</option>
-                <option value="">FRONT-END</option>
-                <option value="">BACK-END</option>
-                <option value="">BANCO DE DADOS</option>
+                <option value="" disabled>Selecione um módulo</option>
+                <% for( let modulo of modulos ) { %>
+                  <option value="<%= modulo.id %>" <%= aluno.modulo_id == modulo.id ? "selected" : ''%> ><%= modulo.nome %></option> 
+                <% } %>
+                
             </select>
             <div class="input-file">
               <div id="photos-upload">

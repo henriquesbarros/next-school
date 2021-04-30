@@ -20,16 +20,16 @@
                 </div>
                 <fieldset class="input">
                   <label for="">Nome completo</label>
-                  <input type="text" name="codigo" placeholder="Digite seu código" maxlength="11">
+                  <input type="text" name="nome" placeholder="Digite seu nome">
                 </fieldset>
             </div>
             <div class="field">
-                <div class="icon" id="toggle" onclick="showHide()">
+                <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
                 </div>
                 <fieldset class="input">
                     <label for="">CPF</label>
-                    <input type="password" id="password" name="cpf" placeholder="Digite seu CPF">
+                    <input type="text" id="password" name="cpf" placeholder="Digite seu CPF">
                 </fieldset>
             </div>
             <select name="modulo_id" id="appearance-select">
@@ -40,7 +40,7 @@
             </select>
             <div class="input-file">
               <div id="photos-upload">
-                <input id="photo-input" type="file" name="img_perfil" accept="image/*">
+                <input id="photo-input" type="file" name="img_perfil" accept="image/*" onchange="addPhoto()">
                 <p>Enviar avatar</p>
               </div>
           </div>
@@ -49,5 +49,13 @@
       </div> 
     </section>
   </main> 
+  <script>
+    const input = document.querySelector('#photo-input')
+    const p = document.querySelector('.input-file p')
+
+    function addPhoto(event) {
+      p.innerText = "Avatar enviado"
+    }
+  </script>
 </body>
 </html>

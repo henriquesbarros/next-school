@@ -1,4 +1,4 @@
-const { Adm} = require('../models');
+const { Adm } = require('../models');
 const admController = {
     login: (req, res) => {
         return res.render('admin/login')

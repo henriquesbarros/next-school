@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid')
 const { Aluno, AlunoDisciplina, Disciplina, Professor, Modulo } = require('../models')
- const { modulo } = require('../lib/utils')
 const { Op } = require('sequelize')
+const { modulo } = require('../lib/utils')
 
 
 const alunosController = {
@@ -28,7 +28,7 @@ const alunosController = {
             include: "boletim"
         })
         let media = 0;
-        for(let i =0; i < result.boletim.length; i++){
+        for(let i = 0; i < result.boletim.length; i++){
             media += result.boletim[i].nota;
          //   console.log(result.boletim[1]);
         }
@@ -39,13 +39,13 @@ const alunosController = {
         return res.render('aluno/show', { aluno: result })
     },
     boletim: async (req, res) => {
+        const notasAluno = []
         const { id } = req.params;
-        const result = await Aluno.findOne({
+        const Notas = await Aluno.findOne({
             where: { id },
             include: "boletim"
         })
-        // result.modulo_id = modulo(result.modulo_id)
-        //  return res.render('aluno/grades', { aluno: result })
+
         const notasJson = Notas.toJSON()        
     
         for (let resultado of notasJson.boletim) {
@@ -57,18 +57,23 @@ const alunosController = {
             })
             const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
             notasAluno.push(obj)
-       }
-       //console.log(nomeDisciplina);
-         return res.render('professor/grades', { notasAluno})         
-        //return res.(result)
+        }
+
+        notasAluno.map(notaAluno => {
+            notaAluno.modulo_id = modulo(notaAluno.modulo_id)
+        })
+
+        return res.render('aluno/grades', { notasAluno })         
     },
     post: async (req, res) => {
-        const {id, modulo_id, nome, cpf } = req.body
-        const { filename } = req.files
-        // const id = uuidv4() //DAR ERRO QUANDO DEIXO ATIVADO
+        const { nome_aluno, cpf, modulo_id } = req.body
+        const { filename } = req.file
+
+        const id = uuidv4() 
+        
         const novoAluno = await Aluno.create({
-            // id,
-            nome,
+            id,
+            nome_aluno,
             cpf,
             img_perfil: filename,
             modulo_id
@@ -80,15 +85,14 @@ const alunosController = {
             }
         })
 
-        const alunoDiscPromise = disciplinas.map(disciplina => {
+        disciplinas.map(disciplina => {
             AlunoDisciplina.create({
                 alunos_id: novoAluno.id,
                 disciplinas_id: disciplina.id
             })
         })
 
-        const promisesFinalized = await Promise.all(alunoDiscPromise)
-        return res.json(promisesFinalized)
+        return res.redirect(`/admin/alunos`)
     },
     listagemAdminAlunos: async (req, res) => {
         const { filter } = req.query;
@@ -98,7 +102,7 @@ const alunosController = {
         if (filter) {
             alunos = await Aluno.findAll({
                 where: {
-                    nome: {[Op.like]: `%${filter}%`}
+                    nome_aluno: {[Op.like]: `%${filter}%`}
                 }
             })
         } else {
@@ -111,15 +115,21 @@ const alunosController = {
 
         return res.render('admin/student-listing', { alunos })
     },
-    editar: (req, res) => {
-        return res.render('admin/student-edit')
+    editar: async (req, res) => {
+        const { id } = req.params
+        const aluno = await Aluno.findOne({
+            where: { id }
+        })
+
+        const modulos = await Modulo.findAll()
+        return res.render('admin/student-edit', { aluno, modulos })
     },
     put: async (req, res) => {
         const { id } = req.params
-        const { nome } = req.body
+        const { nome_aluno } = req.body
 
         const attAluno = await Aluno.update({
-            nome
+            nome_aluno
         }, 
         {
             where: {
