@@ -13,7 +13,7 @@
     <section class="container flex-center">
       <div class="login">
           <h1>Editar aluno</h1>
-          <form action="/admin/alunos/:id?_method=PUT" method="POST" enctype="multipart/form-data">
+          <form action="/admin/alunos/<%= aluno.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
@@ -46,6 +46,10 @@
               </div>
             </div>
             <button class="button" type="submit">Registrar</button>
+          </form>
+          <form action="/admin/alunos/<%= aluno.id %>?_method=DELETE" method="POST">
+            <button class="button" type="submit" style="background-color: red;">Deletar</button>
+            <input type="hidden" name="id" value="<%= aluno.id %>">
           </form>
       </div> 
     </section>

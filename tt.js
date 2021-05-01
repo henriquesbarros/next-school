@@ -1,4 +1,4 @@
-// const { Aluno, Disciplina } = require('./models');
+const { Aluno, Disciplina } = require('./models');
 
 
 // async function teste (){
@@ -94,29 +94,42 @@
         // <%= nota.disciplina_id == 14 ? "MARIADB" : "" %> 
         // <%= nota.disciplina_id == 15 ? "MYSQL" : "" %>
 
+        // let id = '264bb47d-df00-46ed-ad97-9474c20c3eba'
 
-        notas: async (req, res) => {
-            const notasAluno = []
-            const { id } = req.params;
-            const Notas = await Aluno.findOne({
-                where: { id :1 },
-                include: "boletim"
-            })
-           const notasJson = Notas.toJSON()        
+        // show: async
+        // Aluno.findOne({
+        //     where: { id }
+        // }).then(aluno => {
+        //     console.log(aluno)
+        // }).catch(erro => {
+        //     console.log(erro)
+        // })
+        
+
+
+        // notas: async (req, res) => {
+        //     const notasAluno = []
+        //     const { id } = req.params;
+        //     const Notas = await Aluno.findOne({
+        //         where: { id :1 },
+        //         include: "boletim"
+        //     })
+        //    const notasJson = Notas.toJSON()        
     
-            for (let resultado of notasJson.boletim) {
-                const disciplinas = await Disciplina.findOne({
-                    where: { id: resultado.disciplina_id }
-                })
-                const alunos = await Aluno.findOne({
-                    where:{id: resultado.aluno_id}
-                })
-                const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
-                notasAluno.push(obj)
-           }
-           //console.log(nomeDisciplina);
-             return res.render('professor/grades', { notasAluno})
-        }
+        //     for (let resultado of notasJson.boletim) {
+        //         const disciplinas = await Disciplina.findOne({
+        //             where: { id: resultado.disciplina_id }
+        //         })
+        //         const alunos = await Aluno.findOne({
+        //             where:{id: resultado.aluno_id}
+        //         })
+        //         const obj = Object.assign({},alunos.toJSON(), disciplinas.toJSON(), resultado);
+        //         notasAluno.push(obj)
+        //    }
+        //      return res.render('professor/grades', { notasAluno})
+        // }
+
+
         // const { Aluno, AlunoDisciplina, Disciplina, Professor, Modulo } = require('./models')
 
         //    const nota = async (req, res) => {

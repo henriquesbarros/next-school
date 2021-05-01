@@ -136,7 +136,11 @@ const professorController = {
         const { nome, senha_professor, cpf, modulo_id } = req.body;
         const senhaCrypt = bcrypt.hashSync(senha_professor, 10)
         const id = uuidv4()
-        const { filename } = req.file
+
+        let filename = 'user-image.png'
+
+        req.file != undefined ? filename = req.file.filename : null
+
         await Professor.create({
             id,
             nome,
@@ -180,14 +184,20 @@ const professorController = {
     put: async (req, res) => {
         let { id } = req.params
         let { nome, cpf, modulo_id, senha_professor } = req.body;
-        let  { filename } = req.file
 
         const professor = await Professor.findOne({
             where: { id }
         })
 
-        if (filename) {
-            fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+        let filename = professor.img_perfil
+
+        if (req.file != undefined) {
+            if (filename != 'user-image.png') {
+                fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+                filename = req.file.filename
+            } else {
+                filename = req.file.filename
+            }
         }
 
         await Professor.update({
@@ -197,8 +207,11 @@ const professorController = {
             img_perfil: filename,
             modulo_id
         }, {
-            where: { id }
+            where: { 
+                id 
+            }
         })
+
         return res.redirect('/admin/professores')
     },
     delete: async (req, res) => {
@@ -208,7 +221,9 @@ const professorController = {
             where: { id }
         })
 
-        fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+        if (professor.img_perfil != 'user-image.png') {
+            fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+        }
 
         await Professor.destroy({
             where: { id }

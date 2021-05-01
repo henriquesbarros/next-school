@@ -1,3 +1,4 @@
+const fs = require('fs')
 const { v4: uuidv4 } = require('uuid')
 const { Aluno, AlunoDisciplina, Disciplina, Professor, Modulo } = require('../models')
 const { Op } = require('sequelize')
@@ -17,7 +18,6 @@ const alunosController = {
         return res.redirect(`${validarLogin.id}`)
     },
     criar: async (req, res) => {
-        ///rodar pra ver no que dar
         const modulos = await Modulo.findAll();
         return res.render('admin/create-student', { modulos })
     },
@@ -67,9 +67,12 @@ const alunosController = {
     },
     post: async (req, res) => {
         const { nome_aluno, cpf, modulo_id } = req.body
-        const { filename } = req.file
 
         const id = uuidv4() 
+
+        let filename = 'user-image.png'
+
+        req.file != undefined ? filename = req.file.filename : null
         
         const novoAluno = await Aluno.create({
             id,
@@ -87,11 +90,13 @@ const alunosController = {
 
         disciplinas.map(disciplina => {
             AlunoDisciplina.create({
-                alunos_id: novoAluno.id,
-                disciplinas_id: disciplina.id
+                aluno_id: novoAluno.id,
+                disciplina_id: disciplina.id
             })
         })
 
+        Promise.all(disciplinas)
+  
         return res.redirect(`/admin/alunos`)
     },
     listagemAdminAlunos: async (req, res) => {
@@ -126,10 +131,28 @@ const alunosController = {
     },
     put: async (req, res) => {
         const { id } = req.params
-        const { nome_aluno } = req.body
+        const { nome_aluno, cpf, modulo_id } = req.body
 
-        const attAluno = await Aluno.update({
-            nome_aluno
+        const aluno = await Aluno.findOne({
+            where: { id }
+        })
+
+        let filename = aluno.img_perfil
+
+        if (req.file != undefined) {
+            if (filename != 'user-image.png') {
+                fs.unlinkSync(`public/images/usuarios/${professor.img_perfil}`)
+                filename = req.file.filename
+            } else {
+                filename = req.file.filename
+            }
+        }
+
+        Aluno.update({
+            nome_aluno,
+            cpf,
+            img_perfil: filename,
+            modulo_id
         }, 
         {
             where: {
@@ -137,17 +160,32 @@ const alunosController = {
             }
         })
 
-        return res.json(attAluno)
+        return res.redirect('/admin/alunos')
     },
     delete: async (req, res) => {
         const { id } = req.params
-        const delAaluno = await Aluno.destroy({
+
+        const aluno = await Aluno.findOne({
+            where: { id }
+        })
+
+        await AlunoDisciplina.destroy({
+            where : {
+                aluno_id: id
+            }
+        })
+
+        if (aluno.img_perfil != 'user-image.png') {
+            fs.unlinkSync(`public/images/usuarios/${aluno.img_perfil}`)
+        }
+
+        await Aluno.destroy({
             where: {
                 id
             }
         })
 
-        return res.json(delAaluno)
+        return res.redirect('/admin/alunos')
     }
 }
 
