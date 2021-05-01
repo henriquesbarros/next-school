@@ -67,7 +67,7 @@ main section .listing {
 
 main section .listing .student {
     display: grid;
-    grid-template-columns: 1fr 24px;
+    grid-template-columns: 1fr 1.5rem; /* 24px de 16 */
     align-items: center;
     padding: 1rem;
     border-radius: 16px;

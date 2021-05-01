@@ -11,7 +11,7 @@ main section .login {
 }
 
 main section .login h1 {
-    font-size: 38px;
+    font-size: 2.375rem; /* 38px */
     text-align: center;
 }
 
@@ -28,12 +28,12 @@ main section .login form .field {
 }
 
 main section .login form .field div.icon {
-    padding: 22px 24px;
+    padding: 1.375rem 1.5rem; /* 22px 24px */
 }
 
 main section .login form .field div.icon img {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
     align-self: center;
 }
 
@@ -50,14 +50,14 @@ main section .login form .field .input {
 }
 
 main section .login form .field .input label {
-    font-size: 14px;
+    font-size: 0.875; /* 14px */
     color: #6E7191;
 }
 
 main section .login form .field .input input {
     background-color: #EFF0F6;
     border: none;
-    font-size: 16px;
+    font-size: 1rem; /* 16px */
 }
 
 main section .login form select {
@@ -75,7 +75,7 @@ main section .login form select {
     -moz-appearance: none; /* Remove estilo padrão do FireFox */   
     appearance: none; /* Remove estilo padrão do FireFox*/   
     background: url('/images/icons/Forward.svg') no-repeat #eeeeee;  /* Imagem de fundo (Seta) */   
-    background-position: 340px;  
+    background-position: 21.25rem; /* 340px */ 
     padding: 1.5rem;
     display: block;
     /*Posição da imagem do background*/   
@@ -110,7 +110,7 @@ main section .login .input-file #photos-upload p {
     font-weight: 600;
     padding: 0.5rem 1rem;
     border-radius: 50px;
-    border: 3px solid var(--main-color);
+    border: 0.1875rem solid var(--main-color); /* 3px */
     width: 12.5rem; /* 200px de 16 */
 }
 

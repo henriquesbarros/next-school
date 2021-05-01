@@ -92,7 +92,7 @@ main form.grades-prof {
 main form.grades-prof .fields{
     display: grid;
     justify-content: center;
-    grid-template-columns: 18rem 18rem;
+    grid-template-columns: 18rem 18rem; /* 288px 288px de 16 */
     column-gap: 10rem; /* 160px de 16 */
     row-gap: 6rem; /* 96px de 16 */
 }
@@ -111,12 +111,12 @@ main form.grades-prof fieldset label {
 }
 
 main form.grades-prof fieldset input {
-    border: 2px solid #D9DBE9;
+    border: 0.125rem solid #D9DBE9; /* 2px de 16 */
     border-radius: 16px;
     width: 3.5rem; /* 56px de 16 */
     height: 2rem; /* 32px de 16 */
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 1rem; /* 16px de 16 */
+    padding-right: 1rem; /* 16px de 16 */
 }
 
 input[type=number]::-webkit-inner-spin-button { 
