@@ -30,11 +30,9 @@ const alunosController = {
         let media = 0;
         for(let i = 0; i < result.boletim.length; i++){
             media += result.boletim[i].nota;
-         //   console.log(result.boletim[1]);
         }
         const mediaFinal = media / result.boletim.length;
         result.boletim[0].nota = mediaFinal;
-        //console.log(mediaFinal);
         result.modulo_id = modulo(result.modulo_id)
         return res.render('aluno/show', { aluno: result })
     },

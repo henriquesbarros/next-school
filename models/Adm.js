@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Adm = sequelize.define(
         'Adm', {
-        codigo: DataTypes.STRING,
+        // id: DataTypes.STRING,
         senha: DataTypes.STRING
       
     }, {

@@ -34,7 +34,7 @@ main section form input::placeholder {
 main section form button {
     height: 3.5rem;
     width: 4.735rem;
-    border: 2px solid var(--main-color);
+    border: 0.125rem solid var(--main-color); /* 2px de 16 */
     background-color: #FFF;
     border-radius: 16px;
     margin-left: 1.5rem; /*  16px */

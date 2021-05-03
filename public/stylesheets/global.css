@@ -70,11 +70,27 @@ main section figure img {
   opacity: 1;
 }
 
-@media(max-width: 590px) {
-  :root {
-    font-size: 75%; /* 12px */
+@media(max-width: 1280px) {
+  html {
+    font-size: 87.5%; /* 14px */
+  }
+
+  .container {
+    width: 64rem; /* 960px de 14 */
+    margin: 0 auto;
   }
 }
+
+@media (max-width: 768px){
+  html {
+    font-size: 75%; /* 12px */
+  }
+
+  .container {
+    width: 50rem; /* 960px de 14 */
+    margin: 0 auto;
+  }
+}   
 
 .scale {
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);

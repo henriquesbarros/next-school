@@ -81,7 +81,7 @@ const professorController = {
         notasAluno.map(notaAluno => {
             notaAluno.modulo_id = modulo(notaAluno.modulo_id)
         })
-        console.log(notasAluno)
+        // console.log(notasAluno)
         return res.render('professor/grades', { notasAluno })
     },
     putNotas: async (req, res) => {
@@ -92,6 +92,7 @@ const professorController = {
         let disciplina_2 = 0
         let disciplina_3 = 0
         let disciplina_4 = 0
+        let disciplina_5 = 0
 
         const result = Object.keys(req.body).map(key => {
             return [req.body[key]]
@@ -102,18 +103,21 @@ const professorController = {
             disciplina_2 = keys[1].slice(-2)
             disciplina_3 = keys[2].slice(-2)
             disciplina_4 = keys[3].slice(-2)
+            disciplina_5 = keys[4].slice(-2)
         } else {
             disciplina_1 = keys[0].slice(4)
             disciplina_2 = keys[1].slice(4)
             disciplina_3 = keys[2].slice(4)
             disciplina_4 = keys[3].slice(4)
+            disciplina_5 = keys[4].slice(4)
         }
 
         const notas = [
             { "disciplina": Number(disciplina_1), "nota": result[0][0] },
             { "disciplina": Number(disciplina_2), "nota": result[1][0] },
             { "disciplina": Number(disciplina_3), "nota": result[2][0] },
-            { "disciplina": Number(disciplina_4), "nota": result[3][0] }
+            { "disciplina": Number(disciplina_4), "nota": result[3][0] },
+            { "disciplina": Number(disciplina_5), "nota": result[4][0] }
         ]
 
 
@@ -130,7 +134,7 @@ const professorController = {
             })
         }
 
-        return res.json({ mensagem: "Atualizado com sucesso!" })
+        return res.redirect('/professor/listagem')
     },
     post: async (req, res) => {
         const { nome, senha_professor, cpf, modulo_id } = req.body;

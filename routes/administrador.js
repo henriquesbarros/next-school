@@ -4,12 +4,13 @@ const router = express.Router()
 const alunosController = require('../controllers/alunosController')
 const professoresController = require('../controllers/professoresController')
 const admController = require('../controllers/admController')
+const sessionMiddleware = require('../middlewares/session')
 
 router.get('/entrar', admController.login)
 router.post('/entrar', admController.auth)
 // http://localhost:3000/admin/entrar
 
-router.get('/selecionar', admController.select)
+router.get('/selecionar', sessionMiddleware, admController.select)
 // http://localhost:3000/admin/selecionar
 
 

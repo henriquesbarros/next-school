@@ -98,6 +98,17 @@ main section .login form button {
     width: 100%;
 }
 
+@media(max-width: 1280px) {
+    html {
+      font-size: 87.5%; /* 14px */
+    }
+  
+    .container {
+      width: 74rem; /* 1036px de 15 */
+      margin: 0 auto;
+    }
+}
+
 @media (max-width: 768px){
     main section {
         flex-direction: column;
@@ -105,13 +116,11 @@ main section .login form button {
         align-items: center;
         
     }
-   main section.container{
-        width: 43rem;
-        
-    }
+    
     main section figure{
         margin-bottom: 8.75rem;
     }
+    
     main section div.login{
         margin-left: 0px;
     }
