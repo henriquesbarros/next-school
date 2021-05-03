@@ -10,8 +10,26 @@ main section .login {
     width: 23.75rem; /* 380px */
 }
 
+main section .login .header-login {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+main section .login .header-login a {
+    height: 3.5rem;
+    width: 4.735rem;
+    border: 0.125rem solid var(--main-color); /* 2px de 16 */
+    background-color: #FFF;
+    border-radius: 16px;
+    margin-left: 1.5rem; /*  16px */
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
 main section .login h1 {
-    font-size: 2.375rem; /* 38px */
+    font-size: 1.75rem; /* 32px */
     text-align: center;
 }
 

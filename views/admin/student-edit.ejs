@@ -12,7 +12,12 @@
   <main>
     <section class="container flex-center">
       <div class="login">
+        <div class="header-login">
           <h1>Editar aluno</h1>
+          <a href="/admin/selecionar" class="button">
+            <img src="/images/icons/Home.svg" alt="Home icon">
+          </a>
+        </div>
           <form action="/admin/alunos/<%= aluno.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <div class="field">
                 <div class="icon">
@@ -45,7 +50,7 @@
                 <p>Enviar avatar</p>
               </div>
             </div>
-            <button class="button" type="submit">Registrar</button>
+            <button class="button" type="submit">Editar</button>
           </form>
           <form action="/admin/alunos/<%= aluno.id %>?_method=DELETE" method="POST">
             <button class="button" type="submit" style="background-color: red;">Deletar</button>

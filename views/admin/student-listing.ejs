@@ -15,6 +15,9 @@
         <form action="/admin/alunos" method="GET">
             <input type="text" name="filter" placeholder="Buscar">
             <button type="submit"><img src="/images/icons/search.svg" alt="Ícone de pesquisa"></button>
+            <a href="/admin/selecionar" class="button">
+                <img src="/images/icons/Home.svg" alt="Home icon">
+            </a>
         </form>
         <div class="listing">
             <% for( let aluno of alunos ) { %>

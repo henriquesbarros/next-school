@@ -31,7 +31,8 @@ main section form input::placeholder {
     font-size: 1rem; /* 16px */
 }
 
-main section form button {
+main section form button,
+main section form a.button {
     height: 3.5rem;
     width: 4.735rem;
     border: 0.125rem solid var(--main-color); /* 2px de 16 */
