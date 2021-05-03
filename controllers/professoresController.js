@@ -86,49 +86,16 @@ const professorController = {
     },
     putNotas: async (req, res) => {
         const { id } = req.params
-        const keys = Object.keys(req.body)
+        const notas = req.body;   
 
-        let disciplina_1 = 0
-        let disciplina_2 = 0
-        let disciplina_3 = 0
-        let disciplina_4 = 0
-        let disciplina_5 = 0
-
-        const result = Object.keys(req.body).map(key => {
-            return [req.body[key]]
-        })
-
-        if (keys[2].slice(-2) > 10) {
-            disciplina_1 = keys[0].slice(-2)
-            disciplina_2 = keys[1].slice(-2)
-            disciplina_3 = keys[2].slice(-2)
-            disciplina_4 = keys[3].slice(-2)
-            disciplina_5 = keys[4].slice(-2)
-        } else {
-            disciplina_1 = keys[0].slice(4)
-            disciplina_2 = keys[1].slice(4)
-            disciplina_3 = keys[2].slice(4)
-            disciplina_4 = keys[3].slice(4)
-            disciplina_5 = keys[4].slice(4)
-        }
-
-        const notas = [
-            { "disciplina": Number(disciplina_1), "nota": result[0][0] },
-            { "disciplina": Number(disciplina_2), "nota": result[1][0] },
-            { "disciplina": Number(disciplina_3), "nota": result[2][0] },
-            { "disciplina": Number(disciplina_4), "nota": result[3][0] },
-            { "disciplina": Number(disciplina_5), "nota": result[4][0] }
-        ]
-
-
-        for (let nota of notas) {
+        for (let disciplina_id in notas) {
             await AlunoDisciplina.update({
-                nota: nota.nota
+                nota: notas[disciplina_id]
             }, {
                 where: {
                     [Op.and]: [
                         { aluno_id: id },
-                        { disciplina_id: nota.disciplina }
+                        { disciplina_id: disciplina_id }
                     ]
                 }
             })
