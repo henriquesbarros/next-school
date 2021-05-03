@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const sessionMiddleware = require('../middlewares/session')
 const professoresController = require('../controllers/professoresController')
 
 //aluno
@@ -9,14 +10,14 @@ router.get('/entrar', professoresController.login)
 router.post('/entrar', professoresController.auth)
 // http://localhost:3000/professor/entrar
 
-router.get('/show/:id', professoresController.show)
+router.get('/show/:id', sessionMiddleware, professoresController.show)
 // http://localhost:3000/professor/show/:id
 
-router.get('/listagem', professoresController.listagemAlunos)
+router.get('/listagem', sessionMiddleware, professoresController.listagemAlunos)
 // http://localhost:3000/professor/listagem
 
-router.get('/notas/:id', professoresController.notas)
-router.put('/notas/:id', professoresController.putNotas)
+router.get('/notas/:id', sessionMiddleware, professoresController.notas)
+router.put('/notas/:id', sessionMiddleware, professoresController.putNotas)
 // http://localhost:3000/professor/notas/:id
 
 module.exports = router; 

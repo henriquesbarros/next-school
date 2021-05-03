@@ -37,20 +37,30 @@ const professorController = {
                 id
             }
         })
+        const modulo_id = mostrarProfessor.modulo_id
         mostrarProfessor.modulo_id = modulo(mostrarProfessor.modulo_id)
-        return res.render('professor/show', { professor: mostrarProfessor })
+
+        return res.render('professor/show', { professor: mostrarProfessor, modulo_id })
     },
     listagemAlunos: async (req, res) => {
+        const { modulo_id } = req.session.usuarioLogado
         const { filter } = req.query;
+        
         let alunos = []
+
         if (filter) {
             alunos = await Aluno.findAll({
                 where: {
-                    nome_aluno: { [Op.like]: `%${filter}%` }
+                    nome_aluno: { [Op.like]: `%${filter}%` },
+                    modulo_id
                 }
             })
         } else {
-            alunos = await Aluno.findAll()
+            alunos = await Aluno.findAll({
+                where: {
+                    modulo_id
+                }
+            })
         }
 
         alunos.map(aluno => {
