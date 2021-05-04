@@ -5,6 +5,9 @@ const alunosController = require('../controllers/alunosController')
 const professoresController = require('../controllers/professoresController')
 const admController = require('../controllers/admController')
 const sessionMiddleware = require('../middlewares/session')
+const validarCadastroAluno = require('../middlewares/validarCadastroAluno')
+const validarCadastroProfessor = require('../middlewares/validarCadastroProfessor')
+
 
 router.get('/entrar', admController.login)
 router.post('/entrar', admController.auth)
@@ -15,30 +18,30 @@ router.get('/selecionar', sessionMiddleware, admController.select)
 
 
 // Alunos
-router.get('/criar/aluno', alunosController.criar)
-router.post('/criar/aluno', multer.single("img_perfil"), alunosController.post)
+router.get('/criar/aluno',sessionMiddleware, alunosController.criar)
+router.post('/criar/aluno',sessionMiddleware, multer.single("img_perfil"),validarCadastroAluno, alunosController.post)
 // http://localhost:3000/admin/criar/aluno
 
-router.get('/alunos', alunosController.listagemAdminAlunos)
+router.get('/alunos',sessionMiddleware, alunosController.listagemAdminAlunos)
 // http://localhost:3000/admin/alunos
 
-router.get('/alunos/:id', alunosController.editar)
-router.put('/alunos/:id', multer.single("img_perfil"), alunosController.put)
-router.delete('/alunos/:id', alunosController.delete)
+router.get('/alunos/:id',sessionMiddleware, alunosController.editar)
+router.put('/alunos/:id',sessionMiddleware, multer.single("img_perfil"), alunosController.put)
+router.delete('/alunos/:id',sessionMiddleware, alunosController.delete)
 // http://localhost:3000/admin/alunos/:id
 
 
 // Professores
-router.get('/criar/professor', professoresController.criar)
-router.post('/criar/professor', multer.single("img_perfil"), professoresController.post)
+router.get('/criar/professor',sessionMiddleware, professoresController.criar)
+router.post('/criar/professor',sessionMiddleware, multer.single("img_perfil"), validarCadastroProfessor,  professoresController.post)
 // http://localhost:3000/admin/criar/professor
 
-router.get('/professores', professoresController.listagemAdminProfessores)
+router.get('/professores',sessionMiddleware, professoresController.listagemAdminProfessores)
 // http://localhost:3000/admin/professores
 
-router.get('/professores/:id', professoresController.editar)
-router.put('/professores/:id', multer.single("img_perfil"), professoresController.put)
-router.delete('/professores/:id', professoresController.delete)
+router.get('/professores/:id',sessionMiddleware, professoresController.editar)
+router.put('/professores/:id',sessionMiddleware, multer.single("img_perfil"), professoresController.put)
+router.delete('/professores/:id',sessionMiddleware, professoresController.delete)
 // http://localhost:3000/admin/professores/:id
 
 
