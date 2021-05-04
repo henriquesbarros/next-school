@@ -70,13 +70,32 @@ main section figure img {
   opacity: 1;
 }
 
+main section {
+  position: relative;
+}
+
+main section #logout-icon {
+  position: absolute;
+  right: 10rem;
+  top: 4.5rem;
+}
+
+main section #logout-icon img {
+  height: 2rem;
+  width: 2rem;
+}
+
+.show-hide {
+  display: none;
+}
+
 @media(max-width: 1280px) {
   html {
     font-size: 87.5%; /* 14px */
   }
 
   .container {
-    width: 64rem; /* 960px de 14 */
+    width: 70rem; /* 896px de 14 */
     margin: 0 auto;
   }
 }
@@ -87,8 +106,39 @@ main section figure img {
   }
 
   .container {
-    width: 50rem; /* 960px de 14 */
+    width: 40rem; /* 960px de 14 */
     margin: 0 auto;
+  }
+
+  main section #logout-icon {
+    position: absolute;
+    right: 0;
+    top: 5rem;
+  }
+}   
+
+@media (max-width: 480px){
+  html {
+    font-size: 62.5%; /* 10px */
+  }
+
+  .show-hide {
+    display: block;
+  }
+
+  .grades .box {
+    display: none;
+  }
+
+  .container {
+    width: 32.5rem; /* 960px de 14 */
+    margin: 0 auto;
+  }
+
+  main section #logout-icon {
+    position: absolute;
+    right: 0;
+    top: 5rem;
   }
 }   
 

@@ -121,16 +121,17 @@ main section .login .choose-listing a.button {
     background-color: #FFF;
 }
 
-@media(max-width: 1280px) {
-    html {
-      font-size: 87.5%; /* 14px */
+@media (max-width: 1280px){
+    main section .login {
+        margin-left: 5rem;
     }
-  
-    .container {
-      width: 74rem; /* 1036px de 15 */
-      margin: 0 auto;
+    
+    main section .login .buttons {
+        width: 24rem;
+        display: flex;
+        justify-content: space-between;
     }
-}
+} 
 
 @media (max-width: 768px){
     main section {
@@ -147,4 +148,13 @@ main section .login .choose-listing a.button {
     main section div.login{
         margin-left: 0px;
     }
-}   
+}  
+
+@media (max-width: 480px) { 
+    main section figure {
+        margin-bottom: 0;
+    }
+    main section figure img {
+        width: 30.25rem;
+    }
+}

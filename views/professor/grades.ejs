@@ -17,7 +17,15 @@
             <% for( let nota of notasAluno) { %>
                 <fieldset>
                   <label for="" style="text-transform: uppercase;"><%= nota.nome %> </label>
-                    <input type="number" name="<%= nota.disciplina_id %>" value="<%= nota.nota %>" id="disciplina_id">
+                    <input 
+                      type="number" 
+                      name="<%= nota.disciplina_id %>" 
+                      value="<%= nota.nota %>" 
+                      id="disciplina_id"
+                      min="0"
+                      max="10"
+                      step="0.5"
+                    >
                 </fieldset>
             <% } %>
         </div>

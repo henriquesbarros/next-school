@@ -88,3 +88,16 @@ main section .listing .student .info span:nth-child(3) {
     font-size: 0.75rem; /* 10px */
     color: #A59F9F;
 }
+
+@media (max-width: 480px) { 
+    main section form button img,
+    main section form a.button img {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    main section .listing .student img {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}

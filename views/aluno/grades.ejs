@@ -20,14 +20,26 @@
                 <div class="grade"> 
                     <svg>
                         <circle cx="70" cy="70" r="70"></circle>
-                        <circle cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * <%= nota.nota %>) / 10)"></circle>
+                        <circle id="circle-grade" cx="70" cy="70" r="70" style="stroke-dashoffset: calc(440 - (440 * <%= nota.nota %>) / 10)"></circle>
                     </svg>
                     <div class="number">
                         <h2><span><%= nota.nota %> </span>/ 10</h2>
                     </div>
                 </div>
             </div>
+            <div class="grades-bar show-hide">
+              <h2 class="text" style="text-transform: uppercase;"><%= nota.nome %> </h2>
+              <div class="bar-grade">
+                <div class="gray-bar">
+                  <div class="green-bar" style="width: <%= nota.nota %>0%"></div>
+                </div>
+              </div>
+              <div class="number">
+                <h2><span><%= nota.nota %> </span>/ 10</h2>
+              </div>
+            </div>
         <% } %>
+        
     </section>    
   </main> 
 </body>
