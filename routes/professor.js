@@ -3,6 +3,7 @@ var router = express.Router();
 const sessionMiddleware = require('../middlewares/session')
 const professoresController = require('../controllers/professoresController')
 const validarNota = require('../middlewares/validarNota')
+const validarCpf = require('../middlewares/validarCpf')
 
 //aluno
 router.get('/entrar', professoresController.login)
