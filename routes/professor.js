@@ -18,7 +18,7 @@ router.get('/listagem', sessionMiddleware, professoresController.listagemAlunos)
 // http://localhost:3000/professor/listagem
 
 router.get('/notas/:id', sessionMiddleware, professoresController.notas)
-router.put('/notas/:id', sessionMiddleware, professoresController.putNotas)
+router.put('/notas/:id', sessionMiddleware, validarNota, professoresController.putNotas)
 // http://localhost:3000/professor/notas/:id
 
 module.exports = router; 

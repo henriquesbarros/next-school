@@ -61,12 +61,12 @@ main section .login form .field {
 }
 
 main section .login form .field div.icon {
-    padding: 1.375rem 1.5rem; /* 22px 24px de 16 */
+    padding: 1.375rem 1.5rem; 
 }
 
 main section .login form .field div.icon img {
-    width: 1.5rem; /* 24px de 16 */
-    height: 1.5rem; /* 24px de 16 */
+    width: 1.5rem; 
+    height: 1.5rem;
     align-self: center;
 }
 
