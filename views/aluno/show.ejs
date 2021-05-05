@@ -11,7 +11,9 @@
 <body>
   <main>
     <section class="container flex-center">
-      <a href="/" id="logout-icon"><img src="/images/logout.svg" alt="Logout image"></a>
+      <form action="/logout">
+        <button type="submit" id="logout-icon"><img src="/images/logout.svg" alt="Logout image"></button>
+      </form>
       <figure>
         <img src="/images/usuarios/<%= aluno.img_perfil %>" alt="Imagem do aluno">
       </figure>

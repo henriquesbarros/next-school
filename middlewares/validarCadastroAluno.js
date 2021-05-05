@@ -11,14 +11,17 @@ module.exports = async (req, res, next) => {
     
     let UserProfessor = await Professor.findAll({ where: { cpf } });
     if (UserProfessor.length) {
-        res.status(400).json({ erro:  `CPF ja cadastrado no professor: ${ UserProfessor.nome}`});
+        res.render('error', { error: `CPF ja cadastrado!` })
+        // res.status(400).json({ erro:  `CPF ja cadastrado no professor: ${ UserProfessor.nome}`});
     }else{
         let UserAluno = await Aluno.findAll({ where: { cpf } });
         if (UserAluno.length) {
-            res.status(400).json({ erro:  `CPF ja cadastrado no aluno: ${ UserAluno.nome_aluno}`});
+            res.render('error', { error: `CPF ja cadastrado!` })
+            // res.status(400).json({ erro:  `CPF ja cadastrado no aluno: ${ UserAluno.nome_aluno}`});
     }
         if ( !nome_aluno || !cpf || !modulo_id) {
-            res.status(400).json({ erro: "campo em branco" });
+            res.render('error', { error: "Preencha todos os campos!" })
+            // res.status(400).json({ erro: "campo em branco" });
         } else {
                 next();
         }

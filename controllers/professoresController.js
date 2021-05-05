@@ -166,6 +166,8 @@ const professorController = {
         let { id } = req.params
         let { nome, cpf, modulo_id, senha_professor } = req.body;
 
+        const senhaCrypt = bcrypt.hashSync(senha_professor, 10)
+
         const professor = await Professor.findOne({
             where: { id }
         })
@@ -183,7 +185,7 @@ const professorController = {
 
         await Professor.update({
             nome,
-            senha_professor,
+            senha_professor: senhaCrypt,
             cpf,
             img_perfil: filename,
             modulo_id

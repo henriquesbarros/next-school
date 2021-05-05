@@ -10,6 +10,9 @@
 </head>
 <body>
   <main>
+    <!-- <a href="/admin/selecionar" id="home-button" class="button">
+      <img src="/images/icons/Home.svg" alt="Home icon">
+    </a> -->
     <h2><%= notasAluno[0].nome_aluno %> </h2>
     <h1><%= notasAluno[0].modulo_id %> </h1>
     <form action="/professor/notas/<%= notasAluno[0].aluno_id%>?_method=PUT" method="POST" class="grades-prof container">

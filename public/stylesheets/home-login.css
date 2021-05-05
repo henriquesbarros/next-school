@@ -60,11 +60,21 @@ main section .login form .field {
     width: 23.75rem; /* 380px */
 }
 
+/* #eye-icon {
+    padding-right: 10rem;
+} */
+
 main section .login form .field div.icon {
     padding: 1.375rem 1.5rem; 
 }
 
 main section .login form .field div.icon img {
+    width: 1.5rem; 
+    height: 1.5rem;
+    align-self: center;
+}
+
+main section .login form .field div.icon img:nth-child(2) {
     width: 1.5rem; 
     height: 1.5rem;
     align-self: center;

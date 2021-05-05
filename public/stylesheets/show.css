@@ -55,6 +55,16 @@ main section a.button {
     border-radius: 50px;
 }
 
+main section {
+    position: relative;
+}
+
+main section #logout-icon {
+    position: absolute;
+    right: 7rem;
+    top: 4.5rem;
+}
+
 @media (max-width: 768px){
     body main section.container{
         max-width: 768px;
@@ -64,5 +74,11 @@ main section a.button {
 @media (max-width: 480px) { 
     main {
         margin-top: 10rem;
+    }
+
+    main section #logout-icon {
+        position: absolute;
+        right: 2rem;
+        top: 5rem;
     }
 }

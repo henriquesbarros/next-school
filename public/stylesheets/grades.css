@@ -154,14 +154,59 @@ main form.grades-prof button {
     background-color: #00BA88;
 }
 
+main {
+    position: relative;
+}
+
+main #home-button {
+    position: absolute;
+    right: 14.5rem;
+    top: -1rem;
+    height: 3.5rem;
+    width: 4.735rem;
+    border: 0.125rem solid var(--main-color); /* 2px de 16 */
+    background-color: #FFF;
+    border-radius: 16px;
+    margin-left: 1.5rem; /*  16px */
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@media (max-width: 1280px){
+    main #home-button {
+        right: 12rem;
+        top: -1rem;
+        height: 3.5rem;
+        width: 4.735rem;
+        border: 0.125rem solid var(--main-color); /* 2px de 16 */
+    }
+}
+
 @media (max-width: 768px){
     body main.container{
         max-width: 768px;
+    }
+
+    main #home-button {
+        right: 2rem;
+        top: -1rem;
+        height: 3.5rem;
+        width: 4.735rem;
+        border: 0.125rem solid var(--main-color); /* 2px de 16 */
     }
 }
 
 @media (max-width: 480px) { 
     main form.grades-prof .fields {
         column-gap: 5rem;
+    }
+
+    main #home-button {
+        right: -4rem;
+        top: -1rem;
+        height: 3.5rem;
+        width: 4.735rem;
+        border: 0.125rem solid var(--main-color); /* 2px de 16 */
     }
 }

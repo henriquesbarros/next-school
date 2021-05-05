@@ -35,7 +35,8 @@ function TestaCPF(strCPF) {
 }
 
 if(!TestaCPF(cpf)){
-    res.status(400).json({ erro:  `CPF invalido, verifique e tente novamente`});
+       res.render('error', { error: `CPF invalido, verifique e tente novamente!` })
+       // res.status(400).json({ erro:  `CPF invalido, verifique e tente novamente`});
 }else{
   
     next();

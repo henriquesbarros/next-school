@@ -185,3 +185,7 @@ function TestaCPF(strCPF) {
 }
 var strCPF = "12345678925";
 TestaCPF(strCPF)
+
+<h1><%= message %></h1>
+<h2><%= error.status %></h2>
+<pre><%= error.stack %></pre>

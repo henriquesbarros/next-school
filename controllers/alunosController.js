@@ -15,6 +15,8 @@ const alunosController = {
             where: { cpf }
         }) 
 
+        req.session.usuarioLogado = validarLogin
+
         return res.redirect(`${validarLogin.id}`)
     },
     criar: async (req, res) => {

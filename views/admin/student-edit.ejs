@@ -18,7 +18,7 @@
             <img src="/images/icons/Home.svg" alt="Home icon">
           </a>
         </div>
-          <form action="/admin/alunos/<%= aluno.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+          <form  method="POST" action="/admin/alunos/<%= aluno.id %>?_method=PUT" enctype="multipart/form-data">
             <div class="field">
                 <div class="icon">
                     <img src="/images/icons/profile.svg" alt="Icone de perfil">
@@ -42,11 +42,10 @@
                 <% for( let modulo of modulos ) { %>
                   <option value="<%= modulo.id %>" <%= aluno.modulo_id == modulo.id ? "selected" : ''%> ><%= modulo.nome %></option> 
                 <% } %>
-                
             </select>
             <div class="input-file">
               <div id="photos-upload">
-                <input id="photo-input" type="file" name="img_perfil" accept="image/*">
+                <input id="photo-input" type="file" name="img_perfil" accept="image/*" onchange="addPhoto(event)">
                 <p>Enviar avatar</p>
               </div>
             </div>
@@ -54,10 +53,32 @@
           </form>
           <form action="/admin/alunos/<%= aluno.id %>?_method=DELETE" method="POST">
             <button class="button" type="submit" style="background-color: red;">Deletar</button>
-            <input type="hidden" name="id" value="<%= aluno.id %>">
           </form>
       </div> 
     </section>
-  </main> 
+  </main>
+  <script>
+    const password = document.getElementById('password')
+    const toggle = document.getElementById('toggle')
+    const img = document.querySelector('.show-hide')
+
+    function showHide() {
+        if (password.type === 'password') {
+          password.setAttribute('type', 'text')
+          toggle.classList.add('hide')
+          img.src = '/images/icons/hide-password.svg'
+        } else {
+          password.setAttribute('type', 'password')
+          toggle.classList.remove('hide')
+          img.src = '/images/icons/show-password.svg'
+        }
+    }
+
+    const input = document.querySelector('#photo-input')
+    const p = document.querySelector('.input-file p')
+    function addPhoto(event) {
+      p.innerText = "Avatar enviado"
+    }
+</script> 
 </body>
 </html>
