@@ -45,7 +45,7 @@
             </select>
             <div class="field password">
                 <div class="icon" id="toggle" onclick="showHide()">
-                    <img class="show-hide" src="/images/icons/show-password.svg" alt="Icone de perfil">
+                    <img id="show-hide" class="toggle" src="/images/icons/show-password.svg" alt="Icone de perfil">
                 </div>
                 <fieldset class="input">
                     <label for="">Senha</label>
@@ -72,7 +72,7 @@
   <script>
     const password = document.getElementById('password')
     const toggle = document.getElementById('toggle')
-    const img = document.querySelector('.show-hide')
+    const img = document.querySelector('#show-hide')
 
     function showHide() {
         if (password.type === 'password') {
